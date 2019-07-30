@@ -1,0 +1,16 @@
+C:\Users\fpam\source\RNC-master\RNC\bin\Release\RNC.exe.config
+C:\Users\fpam\source\RNC-master\RNC\bin\Release\RNC.exe
+C:\Users\fpam\source\RNC-master\RNC\bin\Release\RNC.pdb
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.csprojAssemblyReference.cache
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.controles.cadastrocontrol.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.consulta.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.gravar.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.Form1.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.Properties.Resources.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.ViewModel.ConsultaRNCView.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.ViewModel.Dashboard.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.csproj.GenerateResource.cache
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.csproj.CoreCompileInputs.cache
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.exe
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.pdb
+C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.login.resources

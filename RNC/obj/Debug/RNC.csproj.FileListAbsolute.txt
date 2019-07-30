@@ -1,0 +1,16 @@
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.controles.cadastrocontrol.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.consulta.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.gravar.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.Form1.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.Properties.Resources.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.ViewModel.ConsultaRNCView.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.ViewModel.Dashboard.resources
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.csproj.GenerateResource.cache
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.csproj.CoreCompileInputs.cache
+C:\Users\fpam\source\RNC-master\RNC\bin\Debug\RNC.exe.config
+C:\Users\fpam\source\RNC-master\RNC\bin\Debug\RNC.exe
+C:\Users\fpam\source\RNC-master\RNC\bin\Debug\RNC.pdb
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.exe
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.pdb
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.csprojAssemblyReference.cache
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.login.resources
