@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RNC.comunicacao;
+using RNC.Exceptions;
 
 namespace RNC.controles
 {
@@ -289,7 +290,7 @@ namespace RNC.controles
             {
                 var buttons = gbOrigen.Controls.OfType<RadioButton>()
                     .FirstOrDefault(n => n.Checked);
-                if (buttons.Text == "" || buttons == null)
+                if (buttons == null || buttons.Text == "")
                 {
                     throw new Exceptions.NoButtonSelected(
                         "É nescessario selecionar todas as opcoes de Radio Button!");
@@ -307,9 +308,21 @@ namespace RNC.controles
                 }
                 var gbRisco = this.gbRisco.Controls.OfType<RadioButton>()
                     .FirstOrDefault(n => n.Checked);
+                if (gbRisco == null || gbRisco.Text =="")
+                {
+                    throw new Exceptions.NoButtonSelected(
+                        "É nescessario selecionar todas as opcoes de Radio Button!");
+                }
                 var risco = gbRisco.Text;
+
+                
                 var tnc = gbtnc.Controls.OfType<RadioButton>()
                     .FirstOrDefault(n => n.Checked);
+                if (tnc == null || tnc.Text =="")
+                {
+                    throw new Exceptions.NoButtonSelected(
+                        "É nescessario selecionar todas as opcoes de Radio Button!");
+                }
                 var butttnc = tnc.Text;
                 colecaodeacaoitem colecao = new colecaodeacaoitem();
                 colecao = StoreRelatorio.GetColecao();
@@ -319,10 +332,17 @@ namespace RNC.controles
                 return relatorioRNC;
 
             }
-            catch (Exception)
+            catch (NoButtonSelected e)
             {
-
-                throw;
+                MessageBox.Show(e.ToString());
+                return null;
+                //throw;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return null;
+                //throw;
             }
 
 

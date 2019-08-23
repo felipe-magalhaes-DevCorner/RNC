@@ -251,6 +251,7 @@ namespace RNC
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::RNC.Properties.Resources.GMN;
             this.pictureBox1.Location = new System.Drawing.Point(66, 10);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(8);
             this.pictureBox1.Name = "pictureBox1";
