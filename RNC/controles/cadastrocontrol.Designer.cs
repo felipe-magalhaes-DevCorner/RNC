@@ -47,7 +47,7 @@
             this.txtauditoria = new System.Windows.Forms.TextBox();
             this.rbaudext = new System.Windows.Forms.RadioButton();
             this.rbaudint = new System.Windows.Forms.RadioButton();
-            this.rboutros = new System.Windows.Forms.RadioButton();
+            this.rbexterno = new System.Windows.Forms.RadioButton();
             this.panel5 = new System.Windows.Forms.Panel();
             this.txtInvestigacao = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -67,6 +67,8 @@
             this.flowpanelAcao = new System.Windows.Forms.FlowLayoutPanel();
             this.btadd = new System.Windows.Forms.Button();
             this.pnacaoitem = new System.Windows.Forms.Panel();
+            this.rbOutros = new System.Windows.Forms.RadioButton();
+            this.txtOutros = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -129,8 +131,11 @@
             this.cbSetor.Dock = System.Windows.Forms.DockStyle.Left;
             this.cbSetor.FormattingEnabled = true;
             this.cbSetor.Items.AddRange(new object[] {
+            "Administrativo",
+            "Área Técnica",
+            "Gerencia",
             "Informatica",
-            "Area Tecnica"});
+            "Secretaria"});
             this.cbSetor.Location = new System.Drawing.Point(579, 0);
             this.cbSetor.Name = "cbSetor";
             this.cbSetor.Size = new System.Drawing.Size(121, 21);
@@ -195,6 +200,8 @@
             // 
             // gbOrigen
             // 
+            this.gbOrigen.Controls.Add(this.txtOutros);
+            this.gbOrigen.Controls.Add(this.rbOutros);
             this.gbOrigen.Controls.Add(this.txtexterna);
             this.gbOrigen.Controls.Add(this.rbverificacaocontrole);
             this.gbOrigen.Controls.Add(this.rbreclamacao);
@@ -202,12 +209,12 @@
             this.gbOrigen.Controls.Add(this.txtauditoria);
             this.gbOrigen.Controls.Add(this.rbaudext);
             this.gbOrigen.Controls.Add(this.rbaudint);
-            this.gbOrigen.Controls.Add(this.rboutros);
+            this.gbOrigen.Controls.Add(this.rbexterno);
             this.gbOrigen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbOrigen.Location = new System.Drawing.Point(0, 0);
             this.gbOrigen.Name = "gbOrigen";
             this.gbOrigen.Size = new System.Drawing.Size(956, 78);
-            this.gbOrigen.TabIndex = 0;
+            this.gbOrigen.TabIndex = 3;
             this.gbOrigen.TabStop = false;
             this.gbOrigen.Text = "Origem: ";
             // 
@@ -222,7 +229,7 @@
             // rbverificacaocontrole
             // 
             this.rbverificacaocontrole.AutoSize = true;
-            this.rbverificacaocontrole.Location = new System.Drawing.Point(441, 6);
+            this.rbverificacaocontrole.Location = new System.Drawing.Point(441, 9);
             this.rbverificacaocontrole.Name = "rbverificacaocontrole";
             this.rbverificacaocontrole.Size = new System.Drawing.Size(199, 17);
             this.rbverificacaocontrole.TabIndex = 4;
@@ -284,16 +291,16 @@
             this.rbaudint.UseVisualStyleBackColor = true;
             this.rbaudint.CheckedChanged += new System.EventHandler(this.rbaudint_CheckedChanged_1);
             // 
-            // rboutros
+            // rbexterno
             // 
-            this.rboutros.AutoSize = true;
-            this.rboutros.Location = new System.Drawing.Point(441, 54);
-            this.rboutros.Name = "rboutros";
-            this.rboutros.Size = new System.Drawing.Size(214, 17);
-            this.rboutros.TabIndex = 6;
-            this.rboutros.TabStop = true;
-            this.rboutros.Text = "Outros: CONTROLE EXTERNO - PELM";
-            this.rboutros.UseVisualStyleBackColor = true;
+            this.rbexterno.AutoSize = true;
+            this.rbexterno.Location = new System.Drawing.Point(441, 54);
+            this.rbexterno.Name = "rbexterno";
+            this.rbexterno.Size = new System.Drawing.Size(141, 17);
+            this.rbexterno.TabIndex = 6;
+            this.rbexterno.TabStop = true;
+            this.rbexterno.Text = "Controle Externo - PELM";
+            this.rbexterno.UseVisualStyleBackColor = true;
             // 
             // panel5
             // 
@@ -403,7 +410,7 @@
             this.rbacaocorretiva.Location = new System.Drawing.Point(69, 19);
             this.rbacaocorretiva.Name = "rbacaocorretiva";
             this.rbacaocorretiva.Size = new System.Drawing.Size(95, 17);
-            this.rbacaocorretiva.TabIndex = 7;
+            this.rbacaocorretiva.TabIndex = 8;
             this.rbacaocorretiva.TabStop = true;
             this.rbacaocorretiva.Text = "Ação Corretiva";
             this.rbacaocorretiva.UseVisualStyleBackColor = true;
@@ -490,6 +497,26 @@
             this.pnacaoitem.Size = new System.Drawing.Size(756, 319);
             this.pnacaoitem.TabIndex = 15;
             // 
+            // rbOutros
+            // 
+            this.rbOutros.AutoSize = true;
+            this.rbOutros.Location = new System.Drawing.Point(726, 9);
+            this.rbOutros.Name = "rbOutros";
+            this.rbOutros.Size = new System.Drawing.Size(59, 17);
+            this.rbOutros.TabIndex = 7;
+            this.rbOutros.TabStop = true;
+            this.rbOutros.Text = "Outros:";
+            this.rbOutros.UseVisualStyleBackColor = true;
+            this.rbOutros.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            // 
+            // txtOutros
+            // 
+            this.txtOutros.Location = new System.Drawing.Point(791, 9);
+            this.txtOutros.Name = "txtOutros";
+            this.txtOutros.Size = new System.Drawing.Size(140, 20);
+            this.txtOutros.TabIndex = 8;
+            this.txtOutros.Visible = false;
+            // 
             // cadastrocontrol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -542,7 +569,7 @@
         private System.Windows.Forms.RadioButton rbinspecao;
         private System.Windows.Forms.RadioButton rbaudext;
         private System.Windows.Forms.RadioButton rbaudint;
-        private System.Windows.Forms.RadioButton rboutros;
+        private System.Windows.Forms.RadioButton rbexterno;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel6;
         public System.Windows.Forms.TextBox txtexterna;
@@ -569,5 +596,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowpanelAcao;
         private System.Windows.Forms.Button btadd;
         public System.Windows.Forms.Panel pnacaoitem;
+        private System.Windows.Forms.RadioButton rbOutros;
+        public System.Windows.Forms.TextBox txtOutros;
     }
 }
