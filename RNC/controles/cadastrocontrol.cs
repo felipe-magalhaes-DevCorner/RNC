@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RNC.comunicacao;
 using RNC.Exceptions;
+// ReSharper disable ComplexConditionExpression
 
 namespace RNC.controles
 {
@@ -215,7 +216,9 @@ namespace RNC.controles
             }
             else
             {
+
                 txtauditoria.Visible = false;
+                txtauditoria.Text = "";
             }
         }
 
@@ -228,6 +231,7 @@ namespace RNC.controles
             else
             {
                 txtexterna.Visible = false;
+                txtexterna.Text = "";
             }
         }
 
@@ -297,9 +301,9 @@ namespace RNC.controles
                 }
 
                 var origemnc = buttons.Text;
-                if ((buttons.TabIndex == 2) || (buttons.TabIndex == 3))
+                if (buttons.TabIndex == 2 || buttons.TabIndex == 3 || buttons.TabIndex == 7)
                 {
-                    origemnc = buttons.Text + txtauditoria.Text + txtexterna.Text;
+                    origemnc = buttons.Text + txtauditoria.Text + txtexterna.Text + txtOutros.Text;
                     if (origemnc == buttons.Text)
                     {
                         throw new Exceptions.BlankFieldEx(
@@ -376,6 +380,19 @@ namespace RNC.controles
 
         #endregion
 
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (rbOutros.Checked == true)
+            {
+                txtOutros.Visible = true;
+            }
+            else
+            {
+                txtOutros.Visible = false;
+                txtOutros.Text = "";
+            }
+        }
     }
 }
 
