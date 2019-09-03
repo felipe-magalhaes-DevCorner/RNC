@@ -66,7 +66,7 @@ namespace RNC.controles
                 buscar bc = new buscar();
                 numerofinal = bc.M_peganumerornc();
                 relatorioRNC = new relatorio(numerofinal, txtDesRNC.Text, txtemitente.Text, DateTime.Now, cbSetor.Text,
-                    null, null, txtInvestigacao.Text, txtDisposicao.Text, "aberta", colecaoacao, null);
+                    null, null, txtInvestigacao.Text, txtDisposicao.Text, "Aberta", colecaoacao, null);
 
                 objGravar._cadastro = this;
                 objGravarMain = objGravar;

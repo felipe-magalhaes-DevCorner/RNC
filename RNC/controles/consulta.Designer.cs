@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.gbSituacao = new System.Windows.Forms.GroupBox();
+            this.btnencerrar = new System.Windows.Forms.Button();
             this.txtAno = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btconsulta = new System.Windows.Forms.Button();
             this.dtGridConsulta = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnencerrar = new System.Windows.Forms.Button();
             this.gbSituacao.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridConsulta)).BeginInit();
             this.panel1.SuspendLayout();
@@ -53,6 +53,16 @@
             this.gbSituacao.TabIndex = 1;
             this.gbSituacao.TabStop = false;
             this.gbSituacao.Text = "Situação";
+            // 
+            // btnencerrar
+            // 
+            this.btnencerrar.Location = new System.Drawing.Point(422, 16);
+            this.btnencerrar.Name = "btnencerrar";
+            this.btnencerrar.Size = new System.Drawing.Size(100, 23);
+            this.btnencerrar.TabIndex = 8;
+            this.btnencerrar.Text = "Encerrar RNC";
+            this.btnencerrar.UseVisualStyleBackColor = true;
+            this.btnencerrar.Click += new System.EventHandler(this.btnencerrar_Click);
             // 
             // txtAno
             // 
@@ -97,7 +107,7 @@
             this.dtGridConsulta.ShowEditingIcon = false;
             this.dtGridConsulta.Size = new System.Drawing.Size(685, 410);
             this.dtGridConsulta.TabIndex = 2;
-            this.dtGridConsulta.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridConsulta_CellContentDoubleClick);
+            this.dtGridConsulta.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGridConsulta_CellContentDoubleClick);
             // 
             // panel1
             // 
@@ -107,16 +117,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(685, 410);
             this.panel1.TabIndex = 3;
-            // 
-            // btnencerrar
-            // 
-            this.btnencerrar.Location = new System.Drawing.Point(420, 16);
-            this.btnencerrar.Name = "btnencerrar";
-            this.btnencerrar.Size = new System.Drawing.Size(75, 23);
-            this.btnencerrar.TabIndex = 8;
-            this.btnencerrar.Text = "Encerrar ";
-            this.btnencerrar.UseVisualStyleBackColor = true;
-            this.btnencerrar.Click += new System.EventHandler(this.btnencerrar_Click);
             // 
             // consulta
             // 

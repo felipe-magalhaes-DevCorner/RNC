@@ -233,18 +233,18 @@ namespace RNC
         public void GetRelatorio()
         {
             db.SqlConnection();
-            string query = "select idnc, descricaonc, emitentenc, datanc, setor, origemnc, tratamentonc, investicacaonc, disposicaonc, situacao, risco from naoconformidade";
+            string query = "select idnc as Número, descricaonc as Descrição, emitentenc as Emitente, datanc as Data, setor as Setor, origemnc as Origem, tratamentonc, investicacaonc, disposicaonc, situacao, risco from naoconformidade";
 
             db.SqlQuery(query);
             DataTable dt = db.ReturnDT();
             foreach (DataRow row in dt.Rows)
             {
 
-                string IDNC = row["idnc"].ToString();
-                string desricao = row["descricaonc"].ToString();
-                string emitentenc = row["emitentenc"].ToString();
-                DateTime data = Convert.ToDateTime(row["datanc"]);
-                string setor = row["setor"].ToString();
+                string IDNC = row["Número"].ToString();
+                string desricao = row["Descrição"].ToString();
+                string emitentenc = row["Emitente"].ToString();
+                DateTime data = Convert.ToDateTime(row["Data"]);
+                string setor = row["Setor"].ToString();
                 string origemnc = row["origemnc"].ToString();
                 string tratamentonc = row["tratamentonc"].ToString();
                 string investicacaonc = row["investicacaonc"].ToString();
@@ -261,7 +261,7 @@ namespace RNC
         string query = "";
 
             objConsulta.dtGridConsulta.DataSource = "";
-            query = "select idnc,datanc,origemnc,setor,tratamentonc ,situacao from naoconformidade where idnc like ('%" + objConsulta.txtAno.Text + "%') ";
+            query = "select idnc as Número,datanc as Data ,origemnc as Origem ,setor as Setor,tratamentonc as Tratamento ,situacao as Situação from naoconformidade where idnc like ('%" + objConsulta.txtAno.Text + "%') ";
             db.SqlConnection();
             db.SqlQuery(query);
             Clipboard.SetText(query);
@@ -279,27 +279,46 @@ namespace RNC
             {
                 if (objConsulta.dtGridConsulta.SelectedCells.Count > 0)
                 {
-                    string idRNC = objConsulta.dtGridConsulta.SelectedCells[0].Value.ToString();
+                    if (objConsulta.dtGridConsulta.SelectedCells[5].Value.ToString() != "Fechada")
+                    {
+                        string idRNC = objConsulta.dtGridConsulta.SelectedCells[0].Value.ToString();
 
-                    string query = "update naoconformidade set situacao = 'Fechada' from naoconformidade where idnc like('%" + idRNC + "%') ";
+                        string query = "update naoconformidade set situacao = 'Fechada' from naoconformidade where idnc like('%" + idRNC + "%') ";
 
-                    db.SqlConnection();
+                        db.SqlConnection();
 
-                    db.SqlQuery(query);
+                        db.SqlQuery(query);
 
-                    db.QueryRun();
+                        db.QueryRun();
 
-                    db.closeConnection();
-                    MessageBox.Show("RNC encerrada com sucesso.");
-                    return true;
+                        db.closeConnection();
+                        MessageBox.Show("RNC encerrada com sucesso.");
+                        return true;
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("RNC ja foi encerrada");
+                    }
+                    
 
 
                 }
-                MessageBox.Show("Nenhuma acao selecionada.");
+                else
+                {
+                    MessageBox.Show("Nenhuma acao selecionada.");
+                    return false;   
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("É nescessario pesquisar primeiro o ano de competencia.");
                 return false;
             }
-            MessageBox.Show("É nescessario pesquisar primeiro o ano de competencia.");
+
             return false;
+
 
 
         }

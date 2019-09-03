@@ -32,8 +32,8 @@
             this.pnbotoes = new System.Windows.Forms.Panel();
             this.lbRNCID = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btMinimize = new System.Windows.Forms.Button();
+            this.btClose = new System.Windows.Forms.Button();
             this.pnPrincipalView = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -44,8 +44,8 @@
             this.panel2.Controls.Add(this.pnbotoes);
             this.panel2.Controls.Add(this.lbRNCID);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.button6);
-            this.panel2.Controls.Add(this.button5);
+            this.panel2.Controls.Add(this.btMinimize);
+            this.panel2.Controls.Add(this.btClose);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(2, 2);
             this.panel2.Name = "panel2";
@@ -57,7 +57,7 @@
             this.pnbotoes.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnbotoes.Location = new System.Drawing.Point(0, 0);
             this.pnbotoes.Name = "pnbotoes";
-            this.pnbotoes.Size = new System.Drawing.Size(156, 60);
+            this.pnbotoes.Size = new System.Drawing.Size(180, 60);
             this.pnbotoes.TabIndex = 6;
             // 
             // lbRNCID
@@ -65,7 +65,7 @@
             this.lbRNCID.AutoSize = true;
             this.lbRNCID.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbRNCID.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lbRNCID.Location = new System.Drawing.Point(664, 25);
+            this.lbRNCID.Location = new System.Drawing.Point(686, 14);
             this.lbRNCID.Name = "lbRNCID";
             this.lbRNCID.Size = new System.Drawing.Size(125, 25);
             this.lbRNCID.TabIndex = 5;
@@ -78,36 +78,36 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(154, 25);
+            this.label3.Location = new System.Drawing.Point(186, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(494, 25);
             this.label3.TabIndex = 4;
             this.label3.Text = "RELATÓRIO DE NÃO CONFORMIDADE - RNC";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // button6
+            // btMinimize
             // 
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(874, 3);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(20, 20);
-            this.button6.TabIndex = 3;
-            this.button6.Text = "-";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.btMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btMinimize.Location = new System.Drawing.Point(874, 3);
+            this.btMinimize.Name = "btMinimize";
+            this.btMinimize.Size = new System.Drawing.Size(20, 20);
+            this.btMinimize.TabIndex = 3;
+            this.btMinimize.Text = "-";
+            this.btMinimize.UseVisualStyleBackColor = true;
+            this.btMinimize.Click += new System.EventHandler(this.button6_Click);
             // 
-            // button5
+            // btClose
             // 
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(896, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(20, 20);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "X";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btClose.Location = new System.Drawing.Point(896, 3);
+            this.btClose.Name = "btClose";
+            this.btClose.Size = new System.Drawing.Size(20, 20);
+            this.btClose.TabIndex = 3;
+            this.btClose.Text = "X";
+            this.btClose.UseVisualStyleBackColor = true;
+            this.btClose.Click += new System.EventHandler(this.button5_Click);
             // 
             // pnPrincipalView
             // 
@@ -143,8 +143,8 @@
         public System.Windows.Forms.Panel pnbotoes;
         public System.Windows.Forms.Label lbRNCID;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btMinimize;
+        private System.Windows.Forms.Button btClose;
         private System.Windows.Forms.Panel pnPrincipalView;
     }
 }

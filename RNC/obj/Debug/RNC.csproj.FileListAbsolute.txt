@@ -12,7 +12,6 @@ C:\Users\fpam\source\RNC-master\RNC\bin\Debug\RNC.exe
 C:\Users\fpam\source\RNC-master\RNC\bin\Debug\RNC.pdb
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.exe
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.pdb
-C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.csprojAssemblyReference.cache
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.login.resources
 C:\Users\fespa\Source\Repos\informaticaGMN\RNC\RNC\bin\Debug\RNC.exe.config
 C:\Users\fespa\Source\Repos\informaticaGMN\RNC\RNC\bin\Debug\RNC.exe
@@ -30,3 +29,5 @@ C:\Users\fespa\Source\Repos\informaticaGMN\RNC\RNC\obj\Debug\RNC.csproj.Generate
 C:\Users\fespa\Source\Repos\informaticaGMN\RNC\RNC\obj\Debug\RNC.csproj.CoreCompileInputs.cache
 C:\Users\fespa\Source\Repos\informaticaGMN\RNC\RNC\obj\Debug\RNC.exe
 C:\Users\fespa\Source\Repos\informaticaGMN\RNC\RNC\obj\Debug\RNC.pdb
+C:\Users\fpam\source\RNC-master\RNC\bin\Debug\Resources\GMN.png
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.csprojAssemblyReference.cache

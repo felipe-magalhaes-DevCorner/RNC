@@ -48,20 +48,17 @@ namespace RNC
 
         private void btnencerrar_Click(object sender, EventArgs e)
         {
-            if (buscar.Encerrarnc())
+            DialogResult dialogResult = MessageBox.Show("Essa é uma ação sem volta, tem certeza que deseja encerrar a RNC?", "Atenção", MessageBoxButtons.YesNo);
+            if(dialogResult == DialogResult.Yes)
             {
+                if (buscar.Encerrarnc())
+                {
                 
-                buscar.objConsulta = this;
-                buscar.Pesquisaano();
+                    buscar.objConsulta = this;
+                    buscar.Pesquisaano();
 
+                }
             }
-            else
-            {
-                
-            }
-            
-            
-
         }
     }
 }

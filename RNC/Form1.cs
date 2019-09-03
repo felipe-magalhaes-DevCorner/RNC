@@ -51,14 +51,15 @@ namespace RNC
             objcadastrocontrol.RNCID = lbRNCID;
             objcadastrocontrol.fechar = panelprincipal;
             objcadastrocontrol.pn_botoes = pnbotoes;
-            //objcadastrocontrol.
+            objcadastrocontrol.Dock = DockStyle.Fill;
             panelprincipal.Controls.Add(objcadastrocontrol);
+
             
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -73,7 +74,9 @@ namespace RNC
 
             panelprincipal.Controls.Clear();
             var objconsulta = new consulta();
+
             pnbotoes.Controls.Clear();
+            objconsulta.Dock = DockStyle.Fill;
             panelprincipal.Controls.Add(objconsulta);
             panelprincipal.AutoSize = true;
 

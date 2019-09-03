@@ -29,6 +29,7 @@ namespace RNC.ViewModel
         private void button5_Click(object sender, EventArgs e)
         {
             this.Close();
+            //Application.Exit();
         }
 
         private void button6_Click(object sender, EventArgs e)

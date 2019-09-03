@@ -40,6 +40,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.gbOrigen = new System.Windows.Forms.GroupBox();
+            this.txtOutros = new System.Windows.Forms.TextBox();
+            this.rbOutros = new System.Windows.Forms.RadioButton();
             this.txtexterna = new System.Windows.Forms.TextBox();
             this.rbverificacaocontrole = new System.Windows.Forms.RadioButton();
             this.rbreclamacao = new System.Windows.Forms.RadioButton();
@@ -67,8 +69,6 @@
             this.flowpanelAcao = new System.Windows.Forms.FlowLayoutPanel();
             this.btadd = new System.Windows.Forms.Button();
             this.pnacaoitem = new System.Windows.Forms.Panel();
-            this.rbOutros = new System.Windows.Forms.RadioButton();
-            this.txtOutros = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -217,6 +217,26 @@
             this.gbOrigen.TabIndex = 3;
             this.gbOrigen.TabStop = false;
             this.gbOrigen.Text = "Origem: ";
+            // 
+            // txtOutros
+            // 
+            this.txtOutros.Location = new System.Drawing.Point(791, 9);
+            this.txtOutros.Name = "txtOutros";
+            this.txtOutros.Size = new System.Drawing.Size(140, 20);
+            this.txtOutros.TabIndex = 8;
+            this.txtOutros.Visible = false;
+            // 
+            // rbOutros
+            // 
+            this.rbOutros.AutoSize = true;
+            this.rbOutros.Location = new System.Drawing.Point(726, 9);
+            this.rbOutros.Name = "rbOutros";
+            this.rbOutros.Size = new System.Drawing.Size(59, 17);
+            this.rbOutros.TabIndex = 7;
+            this.rbOutros.TabStop = true;
+            this.rbOutros.Text = "Outros:";
+            this.rbOutros.UseVisualStyleBackColor = true;
+            this.rbOutros.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
             // txtexterna
             // 
@@ -496,26 +516,6 @@
             this.pnacaoitem.Name = "pnacaoitem";
             this.pnacaoitem.Size = new System.Drawing.Size(756, 319);
             this.pnacaoitem.TabIndex = 15;
-            // 
-            // rbOutros
-            // 
-            this.rbOutros.AutoSize = true;
-            this.rbOutros.Location = new System.Drawing.Point(726, 9);
-            this.rbOutros.Name = "rbOutros";
-            this.rbOutros.Size = new System.Drawing.Size(59, 17);
-            this.rbOutros.TabIndex = 7;
-            this.rbOutros.TabStop = true;
-            this.rbOutros.Text = "Outros:";
-            this.rbOutros.UseVisualStyleBackColor = true;
-            this.rbOutros.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
-            // 
-            // txtOutros
-            // 
-            this.txtOutros.Location = new System.Drawing.Point(791, 9);
-            this.txtOutros.Name = "txtOutros";
-            this.txtOutros.Size = new System.Drawing.Size(140, 20);
-            this.txtOutros.TabIndex = 8;
-            this.txtOutros.Visible = false;
             // 
             // cadastrocontrol
             // 

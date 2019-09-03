@@ -14,3 +14,4 @@ C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.csproj.CoreCompileInputs.cac
 C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.exe
 C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.pdb
 C:\Users\fpam\source\RNC-master\RNC\obj\Release\RNC.login.resources
+C:\Users\fpam\source\RNC-master\RNC\bin\Release\Resources\GMN.png
