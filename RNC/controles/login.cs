@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows.Forms;
 
 namespace RNC
@@ -14,9 +16,9 @@ namespace RNC
 
 		public static string loginName;
 
-		public static string firstName;
+		public static string name;
 
-		public static string lastName;
+
 
 		private static bool control;
 
@@ -59,24 +61,25 @@ namespace RNC
 		private void button1_Click(object sender, EventArgs e)
 		{
 			login.loginName = this.comboBox1.Text;
-			this.db.SqlConnection();
-			string query = "select USUARIOS.FIRSTNAME,USUARIOS.LASTNAME,USUARIOS.USUARIO,USUARIOS.SIGLA AS SENHA from USUARIOS where USUARIOS.BLOQUEADO = 'F' AND USUARIOS.USUARIO =  '" + this.comboBox1.Text + "'";
-			this.db.SqlQuery(query);
+//			this.db.SqlConnection();////////
+            ConnectionClass con = new ConnectionClass();
+            con.SqlConnection();
+			string query = "select USUARIOS.nome,USUARIOS.Login,USUARIOS.SENHA from USUARIOS where USUARIOS.nivel <> 0 AND USUARIOS.Login =  '" + this.comboBox1.Text + "'";
+                con.SqlQuery(query);
 			Clipboard.SetText(query);
-			SqlDataReader _dr = this.db.SingleCellReader();
+			SqlDataReader _dr = con.SingleCellReader();
 			if (!_dr.HasRows)
 			{
 				MessageBox.Show("Usuário Inexistente.");
 			}
 			while (_dr.Read())
 			{
-				if (this.LoginSQl(_dr["USUARIO"].ToString(), _dr["SENHA"].ToString()))
+				if (this.LoginSQl(_dr["Login"].ToString(), _dr["SENHA"].ToString()))
 				{
-					login.loginName = _dr["USUARIO"].ToString();
-					login.firstName = _dr["FIRSTNAME"].ToString();
-					login.lastName = _dr["LASTNAME"].ToString();
+					login.loginName = _dr["Login"].ToString();
+					login.name = _dr["nome"].ToString();
 					login.control = true;
-					StoreRelatorio.loggedname = login.firstName + " " + login.lastName;
+                    StoreRelatorio.loggedname = login.name;
 					Form arg_102_0 = new Form1();
 					base.Hide();
 					arg_102_0.ShowDialog();
@@ -86,6 +89,7 @@ namespace RNC
 					login.control = false;
 				}
 			}
+            con.closeConnection();
 		}
 
 		private bool LoginSQl(string nome, string password)
@@ -100,7 +104,9 @@ namespace RNC
 				MessageBox.Show("Favor informar uma senha.");
 				return false;
 			}
-			if (nome == this.comboBox1.Text && password == this.txtsenha.Text)
+
+            var testevalue = Md5Hash(this.txtsenha.Text);
+			if (nome == this.comboBox1.Text && password == Md5Hash(this.txtsenha.Text))
 			{
 				return true;
 			}
@@ -114,18 +120,19 @@ namespace RNC
 
 		private void login_Load(object sender, EventArgs e)
 		{
-			this.db.SqlConnection();
-			string query = "select USUARIOS.USUARIO from USUARIOS where USUARIOS.BLOQUEADO = 'F'";
-			this.db.SqlQuery(query);
+			var con = new ConnectionClass();
+            con.SqlConnection();
+			string query = "select USUARIOS.Login from USUARIOS where USUARIOS.nivel <> 0";
+            con.SqlQuery(query);
 			Clipboard.SetText(query);
-			SqlDataReader reader = this.db.SingleCellReader();
+			SqlDataReader reader = con.SingleCellReader();
 			DataTable dt = new DataTable();
-			dt.Columns.Add("USUARIO", typeof(string));
+			dt.Columns.Add("Login", typeof(string));
 			dt.Load(reader);
-			this.comboBox1.ValueMember = "USUARIO";
-			this.comboBox1.DisplayMember = "USUARIO";
+			this.comboBox1.ValueMember = "Login";
+			this.comboBox1.DisplayMember = "Login";
 			this.comboBox1.DataSource = dt;
-			this.db.closeConnection();
+            con.closeConnection();
 		}
 
 		private void button2_Click(object sender, EventArgs e)
@@ -141,6 +148,35 @@ namespace RNC
 			}
 			base.Dispose(disposing);
 		}
+        public static string Md5Hash(string _text)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+
+            //compute hash from the bytes of text  
+            md5.ComputeHash(Encoding.ASCII.GetBytes(_text));
+
+            //get hash result after compute it  
+            var result = md5.Hash;
+
+            var strBuilder = new StringBuilder();
+            for (var i = 0; i < result.Length; i++)
+                //change it into 2 hexadecimal digits  
+                //for each byte  
+                strBuilder.Append(result[i].ToString("x2"));
+
+            return strBuilder.ToString();
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 		private void InitializeComponent()
 		{

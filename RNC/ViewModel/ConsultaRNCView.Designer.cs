@@ -49,7 +49,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(919, 60);
+            this.panel2.Size = new System.Drawing.Size(997, 60);
             this.panel2.TabIndex = 6;
             // 
             // pnbotoes
@@ -89,7 +89,7 @@
             // 
             this.btMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btMinimize.Location = new System.Drawing.Point(874, 3);
+            this.btMinimize.Location = new System.Drawing.Point(948, 3);
             this.btMinimize.Name = "btMinimize";
             this.btMinimize.Size = new System.Drawing.Size(20, 20);
             this.btMinimize.TabIndex = 3;
@@ -101,7 +101,7 @@
             // 
             this.btClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btClose.Location = new System.Drawing.Point(896, 3);
+            this.btClose.Location = new System.Drawing.Point(974, 3);
             this.btClose.Name = "btClose";
             this.btClose.Size = new System.Drawing.Size(20, 20);
             this.btClose.TabIndex = 3;
@@ -111,11 +111,13 @@
             // 
             // pnPrincipalView
             // 
+            this.pnPrincipalView.AutoScroll = true;
+            this.pnPrincipalView.AutoSize = true;
             this.pnPrincipalView.BackColor = System.Drawing.Color.White;
             this.pnPrincipalView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnPrincipalView.Location = new System.Drawing.Point(2, 62);
             this.pnPrincipalView.Name = "pnPrincipalView";
-            this.pnPrincipalView.Size = new System.Drawing.Size(919, 728);
+            this.pnPrincipalView.Size = new System.Drawing.Size(997, 728);
             this.pnPrincipalView.TabIndex = 7;
             // 
             // ConsultaRNCView
@@ -123,7 +125,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(49)))));
-            this.ClientSize = new System.Drawing.Size(923, 792);
+            this.ClientSize = new System.Drawing.Size(1001, 792);
             this.Controls.Add(this.pnPrincipalView);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -134,6 +136,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

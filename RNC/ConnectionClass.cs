@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RNC
 {
@@ -86,6 +87,38 @@ namespace RNC
                 _cmd = new SqlCommand(query, _conn);
                 _cmd.ExecuteNonQuery();
             }
+        }
+        //public void closeConnection()
+        //{
+        //    /////------------------------- FECHO A CONEXAO-------------------------------
+        //    _conn.Close();
+        //    _conn.Dispose();
+        //}
+        public DataTable SqlQueryDTParameters(string pQueryText, string[,] parameters)
+        {
+            closeConnection();
+            SqlConnection();
+            /////------------------------- DOU COLAR NA QUERO NO SQL E DIGO AONDE COLAR-------------------------------
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = new SqlCommand(pQueryText, _conn);
+            adapter.SelectCommand.CommandType = CommandType.Text;
+            for (int i = 0; i < parameters.GetLength(0); i++)
+            {
+
+                adapter.SelectCommand.Parameters.AddWithValue(parameters[i, 0], parameters[i, 1]);
+                
+
+            }
+
+            var teste = adapter.SelectCommand.CommandText;
+            Clipboard.SetText(teste);
+            _dt = new DataTable();
+            adapter.Fill(_dt);
+            
+            return _dt;
+
+
+
         }
 
         public void closeConnection()

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gbSituacao = new System.Windows.Forms.GroupBox();
+            this.pbFAQConsulta = new System.Windows.Forms.PictureBox();
             this.btnencerrar = new System.Windows.Forms.Button();
             this.txtAno = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -36,12 +37,14 @@
             this.dtGridConsulta = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.gbSituacao.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFAQConsulta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridConsulta)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbSituacao
             // 
+            this.gbSituacao.Controls.Add(this.pbFAQConsulta);
             this.gbSituacao.Controls.Add(this.btnencerrar);
             this.gbSituacao.Controls.Add(this.txtAno);
             this.gbSituacao.Controls.Add(this.label1);
@@ -53,6 +56,19 @@
             this.gbSituacao.TabIndex = 1;
             this.gbSituacao.TabStop = false;
             this.gbSituacao.Text = "Situação";
+            // 
+            // pbFAQConsulta
+            // 
+            this.pbFAQConsulta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbFAQConsulta.Image = global::RNC.Properties.Resources.faqs;
+            this.pbFAQConsulta.Location = new System.Drawing.Point(663, 30);
+            this.pbFAQConsulta.Name = "pbFAQConsulta";
+            this.pbFAQConsulta.Size = new System.Drawing.Size(16, 16);
+            this.pbFAQConsulta.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbFAQConsulta.TabIndex = 10;
+            this.pbFAQConsulta.TabStop = false;
+            this.pbFAQConsulta.Click += new System.EventHandler(this.pbFAQConsulta_Click);
+            this.pbFAQConsulta.MouseHover += new System.EventHandler(this.pbFAQConsulta_MouseHover);
             // 
             // btnencerrar
             // 
@@ -128,6 +144,7 @@
             this.Size = new System.Drawing.Size(685, 462);
             this.gbSituacao.ResumeLayout(false);
             this.gbSituacao.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFAQConsulta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtGridConsulta)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -142,5 +159,6 @@
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.DataGridView dtGridConsulta;
         private System.Windows.Forms.Button btnencerrar;
+        private System.Windows.Forms.PictureBox pbFAQConsulta;
     }
 }

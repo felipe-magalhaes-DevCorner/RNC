@@ -121,19 +121,6 @@ namespace RNC
 			this._cadastro = cadastro;
 		}
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            buscar buscar = new buscar();
-            if (buscar.Encerrarnc())
-            {
-                MessageBox.Show("RNC encerrada com sucesso.");
-            }
-            else
-            {
-                MessageBox.Show("RNC não pode ser encerrada, favor entrar em contato com o administrador (ERROR: 003)");
-            }
 
-            
-        }
     }
 }

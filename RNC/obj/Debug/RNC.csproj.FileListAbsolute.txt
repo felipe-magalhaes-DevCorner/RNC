@@ -6,7 +6,6 @@ C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.Properties.Resources.resources
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.ViewModel.ConsultaRNCView.resources
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.ViewModel.Dashboard.resources
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.csproj.GenerateResource.cache
-C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.csproj.CoreCompileInputs.cache
 C:\Users\fpam\source\RNC-master\RNC\bin\Debug\RNC.exe.config
 C:\Users\fpam\source\RNC-master\RNC\bin\Debug\RNC.exe
 C:\Users\fpam\source\RNC-master\RNC\bin\Debug\RNC.pdb
@@ -31,3 +30,4 @@ C:\Users\fespa\Source\Repos\informaticaGMN\RNC\RNC\obj\Debug\RNC.exe
 C:\Users\fespa\Source\Repos\informaticaGMN\RNC\RNC\obj\Debug\RNC.pdb
 C:\Users\fpam\source\RNC-master\RNC\bin\Debug\Resources\GMN.png
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.csprojAssemblyReference.cache
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.desricaoacaocontrole.resources

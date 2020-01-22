@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RNC.comunicacao;
+using RNC.Data;
 using RNC.Exceptions;
 // ReSharper disable ComplexConditionExpression
 
@@ -27,12 +28,13 @@ namespace RNC.controles
         private List<previsaodeacao> listacoes = new List<previsaodeacao>();
         private string numerofinal;
         public Form parentObj { get; set; }
-
+        
         #region Contrutor
 
         public cadastrocontrol(relatorio _relatorioRNC = null)
         {
             this.InitializeComponent();
+            
             this.txtemitente.Text = StoreRelatorio.loggedname;
             int a = this.rbaudint.Text.Length;
             int b = this.rbaudext.Text.Length;
@@ -296,8 +298,10 @@ namespace RNC.controles
                     .FirstOrDefault(n => n.Checked);
                 if (buttons == null || buttons.Text == "")
                 {
+
                     throw new Exceptions.NoButtonSelected(
                         "É nescessario selecionar todas as opcoes de Radio Button!");
+
                 }
 
                 var origemnc = buttons.Text;
@@ -306,16 +310,21 @@ namespace RNC.controles
                     origemnc = buttons.Text + txtauditoria.Text + txtexterna.Text + txtOutros.Text;
                     if (origemnc == buttons.Text)
                     {
+
+
                         throw new Exceptions.BlankFieldEx(
                             "Para selecionar auditoria, o campo em frente deve ser preenchido!");
+                        
                     }
                 }
                 var gbRisco = this.gbRisco.Controls.OfType<RadioButton>()
                     .FirstOrDefault(n => n.Checked);
                 if (gbRisco == null || gbRisco.Text =="")
                 {
+
                     throw new Exceptions.NoButtonSelected(
                         "É nescessario selecionar todas as opcoes de Radio Button!");
+                    ;
                 }
                 var risco = gbRisco.Text;
 
@@ -324,6 +333,7 @@ namespace RNC.controles
                     .FirstOrDefault(n => n.Checked);
                 if (tnc == null || tnc.Text =="")
                 {
+
                     throw new Exceptions.NoButtonSelected(
                         "É nescessario selecionar todas as opcoes de Radio Button!");
                 }
@@ -380,7 +390,7 @@ namespace RNC.controles
 
         #endregion
 
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        private void rbOutros_CheckedChanged(object sender, EventArgs e)
         {
 
             if (rbOutros.Checked == true)
@@ -393,6 +403,87 @@ namespace RNC.controles
                 txtOutros.Text = "";
             }
         }
+
+        bool mouseClicked = false;
+
+        private void Resize_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseClicked = true;
+            resixermoreFluid = ((Panel) sender).Parent.Height;
+
+            if (sender is Panel)
+            {
+                resixermoreFluid = ((Panel) sender).Parent.Height;
+            }
+
+            if (sender is GroupBox)
+            {
+                resixermoreFluid = ((Panel) sender).Parent.Height;
+            }
+
+
+
+        }
+
+        private int resixermoreFluid;
+        private void Resize_MouseUp(object sender, MouseEventArgs e)
+        {
+            
+            mouseClicked = false;
+            if (sender is Panel)
+            {
+                ((Panel) sender).Parent.Height = resixermoreFluid;
+            }
+
+            if (sender is GroupBox)
+            {
+                ((GroupBox) sender).Parent.Height = resixermoreFluid;
+            }
+           
+        }
+
+        private void Resize_MouseMove(object sender, MouseEventArgs e)
+        {
+            
+            if (mouseClicked)
+            {
+
+
+                resixermoreFluid = ((Panel) sender).Top + e.Y;
+                //PanelReiszer.Parent.Height = pictureBox1.Top + e.Y;
+                //PanelReiszer.Parent.Width = pictureBox1.Top + e.Y;
+                //this.panel1.Height = pictureBox1.Top + e.Y;
+                //this.panel1.Width = pictureBox1.Left + e.X;
+
+            }
+        }
+
+        private void pbFAQOrigem_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.pbFAQOrigem, "Fonte da não conformidade");
+        }
+
+        private void pbFAQTratamento_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.pbFAQTratamento, "Açoes Corretiva: Visa eliminar a causa de uma nao conformidade." +
+                                                Environment.NewLine +
+                                                "Ação educativa: Visa esclarecer a causa de uma não conformidade que não nescessita de ação corretiva ou melhoria." +
+                                                Environment.NewLine +
+                                                "Melhoria: Visa evitar/melhorar possiveis não conformidades.");
+
+
+
+        }
+
+        private void pbFAQRisco_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.pbFAQRisco, "De acordo com o item 'Gestão de risco' do manual da qualidade");
+        }
+
+
     }
 }
 

@@ -60,5 +60,22 @@ namespace RNC
                 }
             }
         }
+
+
+
+        private void pbFAQConsulta_MouseHover(object sender, EventArgs e)
+        {
+            //todo tooltip consulta
+            ToolTip tt = new ToolTip();
+            tt.SetToolTip(this.pbFAQConsulta, "Digite o ano desejado para consultar" + Environment.NewLine + 
+                                              "Encerrar: conclui a ação.");
+
+
+        }
+
+        private void pbFAQConsulta_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

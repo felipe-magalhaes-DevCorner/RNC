@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RNC.Data;
 
 namespace RNC
 {
@@ -26,6 +27,7 @@ namespace RNC
             test.Add("   ");
             test.Add("   ");
             int testeee = test.Count();
+            
 
 
 

@@ -81,6 +81,7 @@
     <Compile Include="Data\acaoitem.cs" />
     <Compile Include="Data\colecaodeacaoitem.cs" />
     <Compile Include="comunicacao\StoreRelatorio.cs" />
+    <Compile Include="Data\Extensions.cs" />
     <Compile Include="Data\relatorio.cs" />
     <Compile Include="Exceptions\BlankFieldEx.cs" />
     <Compile Include="Exceptions\ConnectionError.cs" />
@@ -112,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="controles\consulta.resx">
       <DependentUpon>consulta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controles\desricaoacaocontrole.resx">
+      <DependentUpon>desricaoacaocontrole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="controles\gravar.resx">
       <DependentUpon>gravar.cs</DependentUpon>
@@ -158,6 +162,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconLock321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="controles\ControlAux\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\faqs.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
