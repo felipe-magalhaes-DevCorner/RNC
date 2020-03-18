@@ -50,8 +50,6 @@ C:\Users\fpam\source\RNC-master\RNC\bin\Debug\RNC.exe.manifest
 C:\Users\fpam\source\RNC-master\RNC\bin\Debug\RNC.application
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.exe.manifest
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.application
-C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.csprojAssemblyReference.cache
-C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.formtopaste.resources
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.ViewModel.PrintDescrição.resources
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.ViewModel.PrintView.resources
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.TrustInfo.xml
@@ -82,3 +80,10 @@ C:\Users\fpam\source\RNC-master\RNC\bin\Debug\itext.sign.xml
 C:\Users\fpam\source\RNC-master\RNC\bin\Debug\itext.styledxmlparser.xml
 C:\Users\fpam\source\RNC-master\RNC\bin\Debug\itext.svg.xml
 C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.csproj.CopyComplete
+C:\Users\fpam\source\RNC-master\RNC\bin\Debug\PdfiumViewer.dll
+C:\Users\fpam\source\RNC-master\RNC\bin\Debug\PdfiumViewer.xml
+C:\Users\fpam\source\RNC-master\RNC\bin\Debug\nl\PdfiumViewer.resources.dll
+C:\Users\fpam\source\RNC-master\RNC\bin\Debug\x64\pdfium.dll
+C:\Users\fpam\source\RNC-master\RNC\bin\Debug\x86\pdfium.dll
+C:\Users\fpam\source\RNC-master\RNC\bin\Debug\PDFFilePrint.dll
+C:\Users\fpam\source\RNC-master\RNC\obj\Debug\RNC.csprojAssemblyReference.cache

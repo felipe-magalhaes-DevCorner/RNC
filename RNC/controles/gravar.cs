@@ -122,15 +122,15 @@ namespace RNC
             this._cadastro = cadastro;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void BtPrint_Click(object sender, EventArgs e)
         {
             var ucConsulta = this.Parent.Parent.Parent;
             relatorio relatorioUsing;
             if (ucConsulta is ConsultaRNCView)
             {
                 relatorioUsing = ((ConsultaRNCView)ucConsulta).GetRelatorio();
-                //PDFPrinter.Printer printer = new Printer();
-                //printer.SetRelatorio(relatorioUsing);
+                PrinterHandler printer = new PrinterHandler();
+                printer.PDFPrinter(relatorioUsing);
 
 
             }

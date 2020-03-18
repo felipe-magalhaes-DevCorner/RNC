@@ -130,6 +130,7 @@ namespace RNC.controles
         {
             previsaodeacao.Displaypanel.Controls.Clear();
             desricaoacaocontrole descricao = new desricaoacaocontrole(this.AcaoUsed, RNCfechada);
+            //descricao.
             descricao.Objprevisaodeacao = this;
             previsaodeacao.Displaypanel.Controls.Add(descricao);
         }

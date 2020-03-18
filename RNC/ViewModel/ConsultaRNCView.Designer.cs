@@ -60,7 +60,7 @@
             this.pnbotoes.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnbotoes.Location = new System.Drawing.Point(0, 0);
             this.pnbotoes.Name = "pnbotoes";
-            this.pnbotoes.Size = new System.Drawing.Size(180, 60);
+            this.pnbotoes.Size = new System.Drawing.Size(196, 60);
             this.pnbotoes.TabIndex = 6;
             // 
             // lbRNCID
@@ -68,7 +68,7 @@
             this.lbRNCID.AutoSize = true;
             this.lbRNCID.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbRNCID.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lbRNCID.Location = new System.Drawing.Point(686, 14);
+            this.lbRNCID.Location = new System.Drawing.Point(729, 14);
             this.lbRNCID.Name = "lbRNCID";
             this.lbRNCID.Size = new System.Drawing.Size(125, 25);
             this.lbRNCID.TabIndex = 5;
@@ -84,7 +84,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(186, 14);
+            this.label3.Location = new System.Drawing.Point(229, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(494, 25);
             this.label3.TabIndex = 4;

@@ -86,6 +86,7 @@ namespace RNC
         private RadioButton radioButton1;
         private RadioButton rbCorretiva;
         private TextBox txtVerificadoPor;
+        private Label label2;
         private bool RNCfechada = false;
 
         public previsaodeacao Objprevisaodeacao
@@ -317,7 +318,7 @@ namespace RNC
             {
                 this.btGravar.Enabled = false;
             }
-
+            label2.Text = "flowLayoutPanel1 Size = " + flowLayoutPanel1.Height;
             this.RealizadaCKHandler();
         }
 
@@ -340,6 +341,7 @@ namespace RNC
             this.gpVerificacao.Visible = false;
             this.gpEficiencia.Visible = false;
 
+
         }
 
         private void ckeficaz_CheckedChanged_1(object sender, EventArgs e)
@@ -348,6 +350,7 @@ namespace RNC
             if (RNCfechada)
             {
                 this.btGravar.Enabled = false;
+
             }
             if (this.ckeficaz.Checked)
             {
@@ -356,7 +359,13 @@ namespace RNC
                 this.gpVerificacao.Visible = true;
                 this.gpEficiencia.Visible = true;
                 this.pnEficacia.Visible = true;
+                
                 return;
+            }
+            else
+            {
+                gpEficiencia.Height -= pnEficacia.Height;
+                    
             }
             this.pnEficacia.Visible = false;
         }
@@ -589,6 +598,7 @@ namespace RNC
             this.pnButtons = new System.Windows.Forms.Panel();
             this.btLimpar = new System.Windows.Forms.Button();
             this.btGravar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.gpDescricao.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFAQDescriçãoAção)).BeginInit();
@@ -742,6 +752,7 @@ namespace RNC
             // 
             // gpVerificacao
             // 
+            this.gpVerificacao.Controls.Add(this.label2);
             this.gpVerificacao.Controls.Add(this.dpPrevistaPara);
             this.gpVerificacao.Controls.Add(this.label10);
             this.gpVerificacao.Controls.Add(this.label9);
@@ -798,7 +809,7 @@ namespace RNC
             // 
             this.pbFAQEficiencia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbFAQEficiencia.Image = global::RNC.Properties.Resources.faqs;
-            this.pbFAQEficiencia.Location = new System.Drawing.Point(728, 25);
+            this.pbFAQEficiencia.Location = new System.Drawing.Point(728, 19);
             this.pbFAQEficiencia.Name = "pbFAQEficiencia";
             this.pbFAQEficiencia.Size = new System.Drawing.Size(16, 16);
             this.pbFAQEficiencia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -982,6 +993,16 @@ namespace RNC
             this.btGravar.Text = "Salvar";
             this.btGravar.UseVisualStyleBackColor = true;
             this.btGravar.Click += new System.EventHandler(this.btGravar_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(415, 14);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "label2";
+            this.label2.Visible = false;
             // 
             // desricaoacaocontrole
             // 

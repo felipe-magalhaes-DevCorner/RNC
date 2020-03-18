@@ -76,6 +76,8 @@
             this.txtDesRNC = new System.Windows.Forms.RichTextBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.MainPanel.SuspendLayout();
             this.flowpanelAcao.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -110,17 +112,19 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(956, 656);
+            this.MainPanel.Size = new System.Drawing.Size(956, 795);
             this.MainPanel.TabIndex = 0;
             // 
             // pnacaoitem
             // 
+            this.pnacaoitem.AutoSize = true;
             this.pnacaoitem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnacaoitem.Location = new System.Drawing.Point(24, 479);
             this.pnacaoitem.MinimumSize = new System.Drawing.Size(0, 316);
             this.pnacaoitem.Name = "pnacaoitem";
             this.pnacaoitem.Size = new System.Drawing.Size(932, 316);
             this.pnacaoitem.TabIndex = 22;
+            this.pnacaoitem.Resize += new System.EventHandler(this.pnacaoitem_Resize);
             // 
             // flowpanelAcao
             // 
@@ -129,7 +133,7 @@
             this.flowpanelAcao.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowpanelAcao.Location = new System.Drawing.Point(0, 479);
             this.flowpanelAcao.Name = "flowpanelAcao";
-            this.flowpanelAcao.Size = new System.Drawing.Size(24, 177);
+            this.flowpanelAcao.Size = new System.Drawing.Size(24, 316);
             this.flowpanelAcao.TabIndex = 20;
             // 
             // btadd
@@ -153,6 +157,8 @@
             // 
             // gbRisco
             // 
+            this.gbRisco.Controls.Add(this.label7);
+            this.gbRisco.Controls.Add(this.label5);
             this.gbRisco.Controls.Add(this.pbFAQRisco);
             this.gbRisco.Controls.Add(this.radioButton1);
             this.gbRisco.Controls.Add(this.radioButton2);
@@ -623,6 +629,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Descrição da Não Conformidade (Real ou Potencial)";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(590, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "label5";
+            this.label5.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(525, 21);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "label7";
+            this.label7.Visible = false;
+            // 
             // cadastrocontrol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -630,7 +656,7 @@
             this.AutoSize = true;
             this.Controls.Add(this.MainPanel);
             this.Name = "cadastrocontrol";
-            this.Size = new System.Drawing.Size(956, 656);
+            this.Size = new System.Drawing.Size(956, 795);
             this.Load += new System.EventHandler(this.cadastrocontrol_Load);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
@@ -710,5 +736,7 @@
         public System.Windows.Forms.RichTextBox txtDesRNC;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
     }
 }

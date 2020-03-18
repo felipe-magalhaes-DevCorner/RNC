@@ -29,7 +29,8 @@ namespace RNC.controles
         public cadastrocontrol(relatorio _relatorioRNC = null)
         {
             this.InitializeComponent();
-
+            label7.Text = "MainPanel Size = " + MainPanel.Height;
+            label5.Text = "PnAcao Size = "  + pnacaoitem.Height;
             this.txtemitente.Text = StoreRelatorio.loggedname;
             int a = this.rbaudint.Text.Length;
             int b = this.rbaudext.Text.Length;
@@ -79,6 +80,7 @@ namespace RNC.controles
                     null, null, txtInvestigacao.Text, txtDisposicao.Text, "Aberta", colecaoacao, null);
 
                 objGravar._cadastro = this;
+                objGravar.btPrint.Visible = false;
                 objGravarMain = objGravar;
                 StoreRelatorio.SetRelatorio(relatorioRNC);
                 objGravar.ShouldUpdate = false;
@@ -362,7 +364,7 @@ namespace RNC.controles
             info = "'" + numerofinal + "','" + txtDesRNC.Text + "' , '" + txtemitente.Text + "' , '" +
                    dpDataRNC.Value.ToString("MM/dd/yyyy") + "' , '" +
                    origemnc + "' , '" + butttnc + "' , '" + txtInvestigacao.Text + "' , '" + txtDisposicao.Text +
-                   "', 'aberta')";
+                   "', 'Aberta')";
             return info;
         }
 
@@ -418,7 +420,7 @@ namespace RNC.controles
                 colecao = StoreRelatorio.GetColecao();
                 DateTime date = dpDataRNC.Value;
                 relatorioRNC = new relatorio(numerofinal, txtDesRNC.Text, txtemitente.Text, date, cbSetor.Text,
-                    origemnc, butttnc, txtInvestigacao.Text, txtDisposicao.Text, "aberta", colecao, risco);
+                    origemnc, butttnc, txtInvestigacao.Text, txtDisposicao.Text, "Aberta", colecao, risco);
                 return relatorioRNC;
 
             }
@@ -599,6 +601,12 @@ namespace RNC.controles
             else
                 txtOutros.Visible = false;
             
+        }
+
+        private void pnacaoitem_Resize(object sender, EventArgs e)
+        {
+            label5.Text = "PNAcao size = " + pnacaoitem.Height;
+            label7.Text = "MainPanel size = " + MainPanel.Height;
         }
     }
 }
