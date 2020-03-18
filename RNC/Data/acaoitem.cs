@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace RNC
 {
@@ -52,7 +48,7 @@ namespace RNC
                 realizada.ToString("MM/dd/yyyy"), "','", previstapara.ToString("MM/dd/yyyy"), "', '", eficaz.ToString(),
                 "', '", verificadopor, "', '", dataverificadopor.ToString("MM/dd/yyyy"), "', '", observacoes, "', '",
                 abertonovorelatorio.ToString(), "', '", novorelatorio, "' , '",
-                datanovorelatorio.ToString("MM/dd/yyyy"), "'");
+                datanovorelatorio.ToString("MM/dd/yyyy"), "', '", tipo, "'");
 
 
 
@@ -75,7 +71,11 @@ namespace RNC
                 observacoes,
                 abertonovorelatorio.ToString(),
                 novorelatorio,
-                datanovorelatorio.ToString("MM/dd/yyyy")
+                datanovorelatorio.ToString("MM/dd/yyyy"),
+                tipo.ToString()
+
+
+
             };
         }
 
@@ -100,6 +100,7 @@ namespace RNC
         #region variaveis
         public int id { get; set; }
         public string descricao { get; set; }
+
         public DateTime prevista { get; set; }
         public DateTime realizada { get; set; }
         public DateTime previstapara { get; set; }
@@ -114,6 +115,8 @@ namespace RNC
         public bool abertonovorelatorio { get; set; }
         public string novorelatorio { get; set; }
         public DateTime datanovorelatorio { get; set; }
+
+        public string tipo { get; set; }
         #endregion
     }
 }

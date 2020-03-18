@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RNC
@@ -30,7 +24,7 @@ namespace RNC
 
             buscar.objConsulta = this;
             buscar.Pesquisaano();
-            
+
 
 
         }
@@ -38,7 +32,7 @@ namespace RNC
         private void dtGridConsulta_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string idRNC = dtGridConsulta.SelectedCells[0].Value.ToString();
-            relatorio _relatorio =  buscar.PegaRelatorioSql(idRNC);
+            relatorio _relatorio = buscar.PegaRelatorioSql(idRNC);
             StoreRelatorio.SetRelatorio(_relatorio);
             ViewModel.ConsultaRNCView objView = new ViewModel.ConsultaRNCView(_relatorio);
             objView.ShowDialog();
@@ -49,11 +43,11 @@ namespace RNC
         private void btnencerrar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Essa é uma ação sem volta, tem certeza que deseja encerrar a RNC?", "Atenção", MessageBoxButtons.YesNo);
-            if(dialogResult == DialogResult.Yes)
+            if (dialogResult == DialogResult.Yes)
             {
                 if (buscar.Encerrarnc())
                 {
-                
+
                     buscar.objConsulta = this;
                     buscar.Pesquisaano();
 
@@ -67,7 +61,7 @@ namespace RNC
         {
             //todo tooltip consulta
             ToolTip tt = new ToolTip();
-            tt.SetToolTip(this.pbFAQConsulta, "Digite o ano desejado para consultar" + Environment.NewLine + 
+            tt.SetToolTip(this.pbFAQConsulta, "Digite o ano desejado para consultar" + Environment.NewLine +
                                               "Encerrar: conclui a ação.");
 
 

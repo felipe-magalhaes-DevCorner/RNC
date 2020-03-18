@@ -28,29 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnCabecalho = new System.Windows.Forms.Panel();
             this.pnbotoes = new System.Windows.Forms.Panel();
             this.lbRNCID = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btMinimize = new System.Windows.Forms.Button();
             this.btClose = new System.Windows.Forms.Button();
             this.pnPrincipalView = new System.Windows.Forms.Panel();
-            this.panel2.SuspendLayout();
+            this.pnCabecalho.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel2
+            // pnCabecalho
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(103)))), ((int)(((byte)(102)))));
-            this.panel2.Controls.Add(this.pnbotoes);
-            this.panel2.Controls.Add(this.lbRNCID);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.btMinimize);
-            this.panel2.Controls.Add(this.btClose);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(2, 2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(997, 60);
-            this.panel2.TabIndex = 6;
+            this.pnCabecalho.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(103)))), ((int)(((byte)(102)))));
+            this.pnCabecalho.Controls.Add(this.pnbotoes);
+            this.pnCabecalho.Controls.Add(this.lbRNCID);
+            this.pnCabecalho.Controls.Add(this.label3);
+            this.pnCabecalho.Controls.Add(this.btMinimize);
+            this.pnCabecalho.Controls.Add(this.btClose);
+            this.pnCabecalho.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnCabecalho.Location = new System.Drawing.Point(2, 2);
+            this.pnCabecalho.Name = "pnCabecalho";
+            this.pnCabecalho.Size = new System.Drawing.Size(997, 60);
+            this.pnCabecalho.TabIndex = 6;
+            this.pnCabecalho.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Click_MouseDown);
+            this.pnCabecalho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Click_MouseMove);
+            this.pnCabecalho.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Click_MouseUp);
             // 
             // pnbotoes
             // 
@@ -72,6 +75,9 @@
             this.lbRNCID.Text = "001 - 2018";
             this.lbRNCID.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lbRNCID.Visible = false;
+            this.lbRNCID.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Click_MouseDown);
+            this.lbRNCID.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Click_MouseMove);
+            this.lbRNCID.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Click_MouseUp);
             // 
             // label3
             // 
@@ -84,6 +90,9 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "RELATÓRIO DE NÃO CONFORMIDADE - RNC";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Click_MouseDown);
+            this.label3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Click_MouseMove);
+            this.label3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Click_MouseUp);
             // 
             // btMinimize
             // 
@@ -127,14 +136,14 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(1001, 792);
             this.Controls.Add(this.pnPrincipalView);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.pnCabecalho);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ConsultaRNCView";
             this.Padding = new System.Windows.Forms.Padding(2);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta RNC";
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnCabecalho.ResumeLayout(false);
+            this.pnCabecalho.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,7 +151,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnCabecalho;
         public System.Windows.Forms.Panel pnbotoes;
         public System.Windows.Forms.Label lbRNCID;
         private System.Windows.Forms.Label label3;

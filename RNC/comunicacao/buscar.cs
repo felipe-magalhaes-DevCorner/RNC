@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace RNC
 {
@@ -17,10 +13,10 @@ namespace RNC
         ConnectionClass db = new ConnectionClass();
         public consulta objConsulta { get; set; }
         private DataTable _dt;
-        
 
 
-        
+
+
 
         public string M_peganumerornc()
         {
@@ -47,7 +43,7 @@ namespace RNC
                     else
                     {
                         id = 1;
-                        numerofinal =    id.ToString("D3") + "-" + DateTime.Now.Year;
+                        numerofinal = id.ToString("D3") + "-" + DateTime.Now.Year;
                     }
 
 
@@ -61,7 +57,7 @@ namespace RNC
             }
 
 
-            db.closeConnection();
+            db.closeConnectionAsync().Wait();
 
             return numerofinal;
 
@@ -95,7 +91,7 @@ namespace RNC
             }
 
 
-            db.closeConnection();
+            db.closeConnectionAsync().Wait();
 
             return numeroid;
 
@@ -130,7 +126,7 @@ namespace RNC
             }
 
 
-            db.closeConnection();
+            db.closeConnectionAsync().Wait();
 
             return numerofinal;
         }
@@ -141,7 +137,7 @@ namespace RNC
 
             relatorio _relatorio = null;
             colecaodeacaoitem colecao = new colecaodeacaoitem();
-            string Query = "SELECT * FROm naoconformidade where idnc = '"+ _idrnc + "'";
+            string Query = "SELECT * FROm naoconformidade where idnc = '" + _idrnc + "'";
             db.SqlConnection();
             db.SqlQuery(Query);
             db.QueryRun();
@@ -174,18 +170,18 @@ namespace RNC
                     risco = dt.Rows[i].Field<string>(10);
 
                 }
-                string Queryacao = "SELECT * FROm descricaoacao inner join naoconformidade_descricaoacao on (naoconformidade_descricaoacao.idacao = descricaoacao.idacao) where idnc = '"+_idrnc+"'";
+                string Queryacao = "SELECT * FROm descricaoacao inner join naoconformidade_descricaoacao on (naoconformidade_descricaoacao.idacao = descricaoacao.idacao) where idnc = '" + _idrnc + "'";
                 db.SqlQuery(Queryacao);
                 db.QueryRun();
                 DataTable dt2 = db.ReturnDT();
-                if (dt2.Rows.Count>0)
+                if (dt2.Rows.Count > 0)
                 {
-                    List<acaoitem> ListaDeAcoes = new List<acaoitem>(); 
+                    List<acaoitem> ListaDeAcoes = new List<acaoitem>();
 
 
-                        for (int i = 0; i < dt2.Rows.Count; i++)
-                        {
-                            int id;
+                    for (int i = 0; i < dt2.Rows.Count; i++)
+                    {
+                        int id;
                         string descricao;
                         DateTime prevista;
                         DateTime realizada;
@@ -196,37 +192,39 @@ namespace RNC
                         string observacoes;
                         string abertonovorelaro;
                         string novorelatorionumero;
-                        
+
                         DateTime novorelatoriodata;
 
-                            id = dt2.Rows[i].Field<int>(0);
-                            descricao = dt2.Rows[i].Field<string>(1);
-                            prevista = dt2.Rows[i].Field<DateTime>(2);
-                            realizada = dt2.Rows[i].Field<DateTime>(3);
-                            previstapara = dt2.Rows[i].Field<DateTime>(4);
-                            eficaz = dt2.Rows[i].Field<string>(5);
-                            verificadopor = dt2.Rows[i].Field<string>(6);
-                            dataverificapor = dt2.Rows[i].Field<DateTime>(7);
-                            observacoes = dt2.Rows[i].Field<string>(8);
-                            abertonovorelaro = dt2.Rows[i].Field<string>(9);
-                            novorelatorionumero = dt2.Rows[i].Field<string>(10);
-                            novorelatoriodata = dt2.Rows[i].Field<DateTime>(11);
-                            
-                            acaoitem novaacao = new acaoitem(id, descricao, prevista, realizada, previstapara,Convert.ToBoolean( eficaz), verificadopor, dataverificapor, observacoes,Convert.ToBoolean( abertonovorelaro), novorelatorionumero, novorelatoriodata);
-                            ListaDeAcoes.Add(novaacao);
+                        id = dt2.Rows[i].Field<int>(0);
+                        descricao = dt2.Rows[i].Field<string>(1);
+                        prevista = dt2.Rows[i].Field<DateTime>(2);
+                        realizada = dt2.Rows[i].Field<DateTime>(3);
+                        previstapara = dt2.Rows[i].Field<DateTime>(4);
+                        eficaz = dt2.Rows[i].Field<string>(5);
+                        verificadopor = dt2.Rows[i].Field<string>(6);
+                        dataverificapor = dt2.Rows[i].Field<DateTime>(7);
+                        observacoes = dt2.Rows[i].Field<string>(8);
+                        abertonovorelaro = dt2.Rows[i].Field<string>(9);
+                        novorelatorionumero = dt2.Rows[i].Field<string>(10);
+                        novorelatoriodata = dt2.Rows[i].Field<DateTime>(11);
 
-                        }
-                    
-                    
+                        acaoitem novaacao = new acaoitem(id, descricao, prevista, realizada, previstapara, Convert.ToBoolean(eficaz), verificadopor, dataverificapor, observacoes, Convert.ToBoolean(abertonovorelaro), novorelatorionumero, novorelatoriodata);
+                        novaacao.tipo = dt2.Rows[i].Field<string>(12);
+
+                        ListaDeAcoes.Add(novaacao);
+
+                    }
+
+
                     colecao.SetList(ListaDeAcoes);
-                    
+
                 }
                 _relatorio = new relatorio(rncid, rncdescricao, emitente, data, setor, origem, tratamento, investigacao, disposicao, status, colecao, risco);
 
 
 
             }
-            db.closeConnection();
+            db.closeConnectionAsync().Wait();
             return _relatorio;
 
         }
@@ -257,8 +255,8 @@ namespace RNC
         }
         public void Pesquisaano()
         {
-            
-        string query = "";
+
+            string query = "";
 
             objConsulta.dtGridConsulta.DataSource = "";
             query = "select idnc as Número,datanc as Data ,origemnc as Origem ,setor as Setor,tratamentonc as Tratamento ,situacao as Situação from naoconformidade where idnc like ('%" + objConsulta.txtAno.Text + "%') ";
@@ -268,7 +266,7 @@ namespace RNC
             db.QueryRun();
             _dt = db.ReturnDT();
             objConsulta.dtGridConsulta.DataSource = _dt;
-            db.closeConnection();
+            db.closeConnectionAsync().Wait();
 
 
         }
@@ -291,7 +289,7 @@ namespace RNC
 
                         db.QueryRun();
 
-                        db.closeConnection();
+                        db.closeConnectionAsync().Wait();
                         MessageBox.Show("RNC encerrada com sucesso.");
                         return true;
 
@@ -300,16 +298,16 @@ namespace RNC
                     {
                         MessageBox.Show("RNC ja foi encerrada");
                     }
-                    
+
 
 
                 }
                 else
                 {
                     MessageBox.Show("Nenhuma acao selecionada.");
-                    return false;   
+                    return false;
                 }
-                
+
             }
             else
             {

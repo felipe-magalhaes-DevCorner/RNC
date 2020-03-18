@@ -64,11 +64,11 @@ namespace RNC
 			get;
 			set;
 		}
-        private string risco
-        {
-            get;
-            set;
-        }
+		private string risco
+		{
+			get;
+			set;
+		}
 
 		private colecaodeacaoitem Colecaodeacaoitem
 		{
@@ -89,8 +89,9 @@ namespace RNC
 			this.disposicao = disposicao;
 			this.status = status;
 			this.Colecaodeacaoitem = colecao;
-            this.risco = risco;
-        }
+			this.risco = risco;
+		}
+
 
 		public List<string> GetRelatorioFields()
 		{
@@ -106,7 +107,7 @@ namespace RNC
 				this.investigacao,
 				this.disposicao,
 				this.status,
-                this.risco
+				this.risco
 			};
 		}
 
@@ -170,8 +171,8 @@ namespace RNC
 				this.disposicao,
 				"' , '",
 				this.status,
-                "' , '",
-                this.risco,
+				"' , '",
+				this.risco,
 				"')"
 			}));
 			if (this.Colecaodeacaoitem.ListCount() > 0)
@@ -198,7 +199,7 @@ namespace RNC
 				this.investigacao,
 				this.disposicao,
 				this.status,
-                this.risco
+				this.risco
 			};
 		}
 	}

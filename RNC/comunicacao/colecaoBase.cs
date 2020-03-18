@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RNC.comunicacao
 {
@@ -8,7 +9,7 @@ namespace RNC.comunicacao
 
         private static int count;
 
-        public List<acaoitem> GetList()
+        public List<acaoitem> GetListAsync()
         {
             return colecaoacaoitemBase;
         }

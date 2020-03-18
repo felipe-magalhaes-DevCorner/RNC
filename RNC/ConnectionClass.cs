@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RNC
 {
-    class ConnectionClass
+    class ConnectionClass : IDisposable
     {
         #region Variables
         // We use these three Sql objects:
@@ -40,7 +38,7 @@ namespace RNC
                 _conn.Open();
                 if (_conn != null && _conn.State == ConnectionState.Closed)
                 {
-                    throw new Exceptions.ConnectionError("Sem comunicação com o banco de dados!");
+                    throw new Exceptions.ConnectionError($"Sem comunicação com o banco de dados!");
                 }
             }
             catch (Exception)
@@ -54,7 +52,7 @@ namespace RNC
 
         #endregion
         #region Handlers
-        public void SqlQuery(string pQueryText)        
+        public void SqlQuery(string pQueryText)
         {
             /////------------------------- DOU COLAR NA QUERO NO SQL E DIGO AONDE COLAR-------------------------------
             _cmd = new SqlCommand(pQueryText, _conn);
@@ -96,7 +94,7 @@ namespace RNC
         //}
         public DataTable SqlQueryDTParameters(string pQueryText, string[,] parameters)
         {
-            closeConnection();
+            closeConnectionAsync().Wait();
             SqlConnection();
             /////------------------------- DOU COLAR NA QUERO NO SQL E DIGO AONDE COLAR-------------------------------
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -106,7 +104,7 @@ namespace RNC
             {
 
                 adapter.SelectCommand.Parameters.AddWithValue(parameters[i, 0], parameters[i, 1]);
-                
+
 
             }
 
@@ -114,14 +112,14 @@ namespace RNC
             Clipboard.SetText(teste);
             _dt = new DataTable();
             adapter.Fill(_dt);
-            
+
             return _dt;
 
 
 
         }
 
-        public void closeConnection()
+        public async Task closeConnectionAsync()
         {
             /////------------------------- FECHO A CONEXAO-------------------------------
             _conn.Close();
@@ -130,6 +128,13 @@ namespace RNC
         #endregion
 
 
-
+        public void Dispose()
+        {
+            _conn?.Dispose();
+            _cmd?.Dispose();
+            _datareader?.Dispose();
+            _datadapter?.Dispose();
+            _dt?.Dispose();
+        }
     }
 }

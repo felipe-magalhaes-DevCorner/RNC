@@ -3,453 +3,562 @@ using RNC.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace RNC
 {
-	public class desricaoacaocontrole : UserControl
-	{
-		private acaoitem Acaoitem;
+    public class desricaoacaocontrole : UserControl
+    {
+        private acaoitem Acaoitem;
 
-		private ConnectionClass db = new ConnectionClass();
+        private ConnectionClass db = new ConnectionClass();
 
-		private buscar bc = new buscar();
+        private buscar bc = new buscar();
 
-		private acaoitem AcaoUsando;
+        private acaoitem AcaoUsando;
 
-		private List<acaoitem> ListAcoes = new List<acaoitem>();
+        private List<acaoitem> ListAcoes = new List<acaoitem>();
 
-		private IContainer components;
+        private IContainer components;
 
-		private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flowLayoutPanel1;
 
-		private GroupBox gpDescricao;
+        private GroupBox gpDescricao;
 
-		private CheckBox ckRealizada;
+        private CheckBox ckRealizada;
 
-		private DateTimePicker dpDtRealizada;
+        private DateTimePicker dpDtRealizada;
 
-		private DateTimePicker dpPrevista;
+        private DateTimePicker dpPrevista;
 
-		private Label label8;
+        private Label label8;
 
-		private Label label4;
+        private Label label4;
 
-		private RichTextBox txtdescricao;
+        private RichTextBox txtdescricao;
 
-		private GroupBox gpVerificacao;
+        private GroupBox gpVerificacao;
 
-		private DateTimePicker dpPrevistaPara;
+        private DateTimePicker dpPrevistaPara;
 
-		private Label label10;
+        private Label label10;
 
-		private Label label9;
+        private Label label9;
 
-		private GroupBox gpEficiencia;
+        private GroupBox gpEficiencia;
 
-		private CheckBox ckeficaz;
+        private CheckBox ckeficaz;
 
-		private Panel pnEficacia;
+        private Panel pnEficacia;
 
-		private DateTimePicker dpNovoRelatorio;
+        private DateTimePicker dpNovoRelatorio;
 
-		private DateTimePicker dpDTVerificada;
+        private DateTimePicker dpDTVerificada;
 
-		private CheckBox cknovorelatorio;
+        private CheckBox cknovorelatorio;
 
-		private Label label16;
+        private Label label16;
 
-		private RichTextBox txtObservacao;
+        private RichTextBox txtObservacao;
 
-		private Label label15;
+        private Label label15;
 
-		private Label label13;
+        private Label label13;
 
-		private Label label12;
+        private Label label12;
 
-		private Panel pnButtons;
+        private Panel pnButtons;
 
-		private Button btLimpar;
+        private Button btLimpar;
 
-		public Button btGravar;
+        public Button btGravar;
 
-		private MaskedTextBox mskNRNC;
+        private MaskedTextBox mskNRNC;
 
-		private Label label1;
-		private PictureBox pbFAQDescriçãoAção;
-		private PictureBox pbFAQEficiencia;
-		private PictureBox pbFAQObservaçãoAcao;
-		private TextBox txtVerificadoPor;
+        private Label label1;
+        private PictureBox pbFAQDescriçãoAção;
+        private PictureBox pbFAQEficiencia;
+        private PictureBox pbFAQObservaçãoAcao;
+        private RadioButton radioButton2;
+        private RadioButton radioButton1;
+        private RadioButton rbCorretiva;
+        private TextBox txtVerificadoPor;
+        private bool RNCfechada = false;
 
-		public previsaodeacao Objprevisaodeacao
-		{
-			get;
-			set;
-		}
+        public previsaodeacao Objprevisaodeacao
+        {
+            get;
+            set;
+        }
 
-		public desricaoacaocontrole(acaoitem _acaoitem)
-		{
-			this.InitializeComponent();
-			this.AcaoUsando = _acaoitem;
-			_acaoitem.datanovorelatorio.ToString("dd/MM/yyyy");
-			this.RealizadaCKHandler();
-			if ((_acaoitem.datanovorelatorio.ToString("dd/MM/yyyy") != "01/01/0001" && _acaoitem.dataverificadopor.ToString("dd/MM/yyyy") != "01/01/0001") || _acaoitem.descricao != null)
-			{
-				this.carregacao(this.AcaoUsando);
-				return;
-			}
-			this.NewAcaoHandler(this.AcaoUsando);
-		}
+        public desricaoacaocontrole(acaoitem _acaoitem, bool fechada = false)
+        {
+            this.InitializeComponent();
+            this.AcaoUsando = _acaoitem;
+            this.RNCfechada = fechada;
+            _acaoitem.datanovorelatorio.ToString("dd/MM/yyyy");
+            this.RealizadaCKHandler();
+            if (RNCfechada)
+            {
+                LockAllControllers(this.Controls);
+                btGravar.Enabled = false;
+            }
+            if ((_acaoitem.datanovorelatorio.ToString("dd/MM/yyyy") != "01/01/0001" && _acaoitem.dataverificadopor.ToString("dd/MM/yyyy") != "01/01/0001") || _acaoitem.descricao != null)
+            {
+                this.carregacao(this.AcaoUsando);
+                return;
+            }
+            this.NewAcaoHandler(this.AcaoUsando);
 
-		private void NewAcaoHandler(acaoitem _acao)
-		{
-			this.txtdescricao.Text = _acao.descricao;
-			this.dpPrevista.Value = DateTime.Now;
-			this.pnButtons.Visible = true;
-			this.dpDtRealizada.Visible = false;
-			this.gpVerificacao.Visible = false;
-			this.gpEficiencia.Visible = false;
-			this.pnEficacia.Visible = false;
-			this.dpDtRealizada.Text = "";
-			this.dpPrevistaPara.Text = "";
-			this.txtObservacao.Text = _acao.observacoes;
-			this.ckeficaz.Checked = Convert.ToBoolean(_acao.eficaz);
-			this.txtVerificadoPor.Text = _acao.verificadopor;
-			this.dpDTVerificada.Text = "";
-			this.cknovorelatorio.Checked = Convert.ToBoolean(_acao.abertonovorelatorio);
-			this.mskNRNC.Visible = false;
-			this.dpNovoRelatorio.Visible = false;
-			this.label12.Visible = false;
-			this.label1.Visible = false;
-		}
 
-		private void carregacao(acaoitem _acao)
-		{
-			this.txtdescricao.Text = _acao.descricao;
-			this.dpPrevista.Value = _acao.prevista;
-			if (_acao.realizada.ToString("dd/MM/yyyy") != "01/01/0001")
-			{
-				this.dpDtRealizada.Value = _acao.realizada;
-				this.ckRealizada.Checked = true;
-				this.dpPrevistaPara.Value = _acao.previstapara;
-				this.ckeficaz.Checked = Convert.ToBoolean(_acao.eficaz);
-				if (this.ckeficaz.Checked)
-				{
-					this.txtVerificadoPor.Text = _acao.verificadopor;
-					this.dpDTVerificada.Value = _acao.dataverificadopor;
-				}
-				this.cknovorelatorio.Checked = Convert.ToBoolean(_acao.abertonovorelatorio);
-				if (this.cknovorelatorio.Checked)
-				{
-					this.mskNRNC.Text = _acao.novorelatorio;
-				}
-				this.txtObservacao.Text = _acao.observacoes;
-			}
-			else
-			{
-				this.ckRealizada.Checked = false;
-			}
-			if (this.cknovorelatorio.Checked)
-			{
-				this.mskNRNC.Visible = true;
-				this.mskNRNC.Text = _acao.novorelatorio;
-				this.dpNovoRelatorio.Visible = true;
-				this.label12.Visible = true;
-				this.label1.Visible = true;
-				this.dpNovoRelatorio.Value = _acao.datanovorelatorio;
-				return;
-			}
-			this.mskNRNC.Visible = false;
-			this.dpNovoRelatorio.Visible = false;
-			this.label12.Visible = false;
-			this.label1.Visible = false;
-		}
+        }
 
-		public void m_transformacaoitem(acaoitem _acao)
-		{
-			try
-			{
-				_acao.descricao = this.txtdescricao.Text;
-				_acao.prevista = this.dpPrevista.Value;
-				if (this.ckRealizada.Checked)
-				{
-					_acao.realizada = this.dpDtRealizada.Value;
-					_acao.previstapara = this.dpPrevistaPara.Value;
-				}
-				_acao.eficaz = Convert.ToBoolean(this.ckeficaz.Checked);
-				if (this.ckeficaz.Checked)
-				{
-					_acao.verificadopor = this.txtVerificadoPor.Text;
-					_acao.dataverificadopor = this.dpDTVerificada.Value;
-					_acao.observacoes = this.txtObservacao.Text;
-					_acao.novorelatorio = this.mskNRNC.Text;
-					_acao.abertonovorelatorio = Convert.ToBoolean(this.cknovorelatorio.Checked);
-					if (this.cknovorelatorio.Checked)
-					{
-						_acao.datanovorelatorio = this.dpNovoRelatorio.Value;
-					}
-				}
-			}
-			catch (WrongDatetime arg_EE_0)
-			{
-				MessageBox.Show(arg_EE_0.ToString());
-			}
-			catch (BlankFieldEx arg_FB_0)
-			{
-				MessageBox.Show(arg_FB_0.ToString());
-			}
-		}
+        private void NewAcaoHandler(acaoitem _acao)
+        {
+            this.txtdescricao.Text = _acao.descricao;
+            this.dpPrevista.Value = DateTime.Now;
+            this.pnButtons.Visible = true;
+            this.dpDtRealizada.Visible = false;
+            this.gpVerificacao.Visible = false;
+            this.gpEficiencia.Visible = false;
+            this.pnEficacia.Visible = false;
+            this.dpDtRealizada.Text = "";
+            this.dpPrevistaPara.Text = "";
+            this.txtObservacao.Text = _acao.observacoes;
+            this.ckeficaz.Checked = Convert.ToBoolean(_acao.eficaz);
+            this.txtVerificadoPor.Text = _acao.verificadopor;
+            this.dpDTVerificada.Text = "";
+            this.cknovorelatorio.Checked = Convert.ToBoolean(_acao.abertonovorelatorio);
+            this.mskNRNC.Visible = false;
+            this.dpNovoRelatorio.Visible = false;
+            this.label12.Visible = false;
+            this.label1.Visible = false;
 
-		private static void CheckDate(string[] _ToText)
-		{
-			string format = "dd/MM/yyyy";
-			CultureInfo formatdate = new CultureInfo("pt-BR");
-			for (int i = 0; i < _ToText.Length; i++)
-			{
-				DateTime datetime;
-				if (!DateTime.TryParseExact(_ToText[i], format, formatdate, DateTimeStyles.AssumeLocal, out datetime))
-				{
-					throw new WrongDatetime("Data incorreta");
-				}
-			}
-		}
+        }
 
-		private static void CheckDate(DateTime _date)
-		{
-			new CultureInfo("pt-BR");
-		}
+        private void carregacao(acaoitem _acao)
+        {
+            this.txtdescricao.Text = _acao.descricao;
+            this.dpPrevista.Value = _acao.prevista;
+            if (_acao.realizada.ToString("dd/MM/yyyy") != "01/01/0001")
+            {
+                this.dpDtRealizada.Value = _acao.realizada;
+                this.ckRealizada.Checked = true;
+                this.dpPrevistaPara.Value = _acao.previstapara;
+                this.ckeficaz.Checked = Convert.ToBoolean(_acao.eficaz);
+                if (this.ckeficaz.Checked)
+                {
+                    this.txtVerificadoPor.Text = _acao.verificadopor;
+                    this.dpDTVerificada.Value = _acao.dataverificadopor;
+                }
+                this.cknovorelatorio.Checked = Convert.ToBoolean(_acao.abertonovorelatorio);
+                if (this.cknovorelatorio.Checked)
+                {
+                    this.mskNRNC.Text = _acao.novorelatorio;
+                }
+                this.txtObservacao.Text = _acao.observacoes;
 
-		private static void CheckBlank(string[] _ToText)
-		{
-			for (int i = 0; i < _ToText.Length; i++)
-			{
-				if (!(_ToText[i] != ""))
-				{
-					throw new BlankFieldEx("Algum campo obrigatorio esta em branco");
-				}
-			}
-		}
+            }
+            else
+            {
+                this.ckRealizada.Checked = false;
+            }
 
-		public void button1_Click(object sender, EventArgs e)
-		{
-		}
+            foreach (Control contro in gpDescricao.Controls)
+            {
+                if (contro is RadioButton)
+                {
+                    var rb = (RadioButton)contro;
+                    if (rb.Text == _acao.tipo.Trim())
+                    {
+                        rb.Checked = true;
+                    }
+                }
+            }
 
-		private void ckeficaz_CheckedChanged(object sender, EventArgs e)
-		{
-			if (this.ckeficaz.Checked)
-			{
-				this.pnEficacia.Visible = true;
-				return;
-			}
-			this.pnEficacia.Visible = false;
-		}
 
-		private void cbRealizada_CheckedChanged(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-			this.RealizadaCKHandler();
-		}
+            if (this.cknovorelatorio.Checked)
+            {
+                this.mskNRNC.Visible = true;
+                this.mskNRNC.Text = _acao.novorelatorio;
+                this.dpNovoRelatorio.Visible = true;
+                this.label12.Visible = true;
+                this.label1.Visible = true;
+                this.dpNovoRelatorio.Value = _acao.datanovorelatorio;
+                return;
+            }
+            this.mskNRNC.Visible = false;
+            this.dpNovoRelatorio.Visible = false;
+            this.label12.Visible = false;
+            this.label1.Visible = false;
 
-		private void RealizadaCKHandler()
-		{
-			if (this.ckRealizada.Checked)
-			{
-				this.dpDtRealizada.Visible = true;
-				this.dpPrevistaPara.Visible = true;
-				this.dpDTVerificada.Visible = true;
-				this.gpVerificacao.Visible = true;
-				this.gpEficiencia.Visible = true;
-				this.pnEficacia.Visible = false;
-				return;
-			}
-			this.ckeficaz.Checked = false;
-			this.dpDtRealizada.Visible = false;
-			this.dpPrevistaPara.Visible = false;
-			this.dpDTVerificada.Visible = false;
-			this.gpVerificacao.Visible = false;
-			this.gpEficiencia.Visible = false;
+        }
 
-		}
+        public bool m_transformacaoitem(acaoitem _acao)
+        {
+            try
+            {
+                _acao.descricao = this.txtdescricao.Text;
+                _acao.prevista = this.dpPrevista.Value;
+                if (this.ckRealizada.Checked)
+                {
+                    _acao.realizada = this.dpDtRealizada.Value;
+                    _acao.previstapara = this.dpPrevistaPara.Value;
+                }
+                _acao.eficaz = Convert.ToBoolean(this.ckeficaz.Checked);
+                if (this.ckeficaz.Checked)
+                {
+                    _acao.verificadopor = this.txtVerificadoPor.Text;
+                    _acao.dataverificadopor = this.dpDTVerificada.Value;
+                    _acao.observacoes = this.txtObservacao.Text;
+                    _acao.novorelatorio = this.mskNRNC.Text;
+                    _acao.abertonovorelatorio = Convert.ToBoolean(this.cknovorelatorio.Checked);
+                    if (this.cknovorelatorio.Checked)
+                    {
+                        _acao.datanovorelatorio = this.dpNovoRelatorio.Value;
+                    }
+                }
+                var buttons = gpDescricao.Controls.OfType<RadioButton>()
+                    .FirstOrDefault(n => n.Checked);
 
-		private void ckeficaz_CheckedChanged_1(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-			if (this.ckeficaz.Checked)
-			{
+                if (buttons == null || buttons.Text == "")
+                {
 
-				this.dpDTVerificada.Visible = true;
-				this.gpVerificacao.Visible = true;
-				this.gpEficiencia.Visible = true;
-				this.pnEficacia.Visible = true;
-				return;
-			}
-			this.pnEficacia.Visible = false;
-		}
 
-		private void cknovorelatorio_CheckedChanged(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-			if (this.cknovorelatorio.Checked)
-			{
-				this.label12.Visible = true;
-				this.dpNovoRelatorio.Visible = true;
-				this.label1.Visible = true;
-				this.mskNRNC.Visible = true;
-				return;
-			}
-			this.label12.Visible = false;
-			this.dpNovoRelatorio.Visible = false;
-			this.label1.Visible = false;
-			this.mskNRNC.Visible = false;
-		}
+                    throw new Exceptions.NoButtonSelected(
+                        "É nescessario selecionar se a ação é corretiva, educativa ou preventiva!");
 
-		private void btGravar_Click(object sender, EventArgs e)
-		{
-			this.m_transformacaoitem(this.AcaoUsando);
-			List<acaoitem> listaToReplace = StoreRelatorio.GetList();
-			try
-			{
-				if (listaToReplace.Count<acaoitem>() == 0)
-				{
-					this.AcaoUsando.id = 1;
-					listaToReplace.Add(this.AcaoUsando);
-				}
-				else if (listaToReplace.Count<acaoitem>() > 0)
-				{
-					acaoitem aux = listaToReplace.Last<acaoitem>();
-					for (int i = 0; i < listaToReplace.Count<acaoitem>(); i++)
-					{
-						if (this.AcaoUsando.id == 0)
-						{
-							this.AcaoUsando.id = aux.id + 1;
-							listaToReplace.Add(this.AcaoUsando);
-							break;
-						}
-						if (listaToReplace[i].id == this.AcaoUsando.id)
-						{
-							listaToReplace[listaToReplace.IndexOf(listaToReplace[i])] = this.AcaoUsando;
-						}
-					}
-				}
-				
-				StoreRelatorio.SetList(listaToReplace);
-				this.btGravar.Enabled = false;
-                MessageBox.Show("Acao gravado com sucesso, lembre-se é nescessario salvar o relatorio");
-			}
-			catch (Exception)
-			{
-				throw;
-			}
-		}
+                }
+                else
+                {
+                    _acao.tipo = buttons.Text;
+                }
 
-		private void txtdescricao_TextChanged(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-			if (this.txtdescricao.Text.Length > 9)
-			{
-				this.Objprevisaodeacao.lbDescri.Text = this.txtdescricao.Text.Substring(0, 9) + "...";
-			}
-			else
-			{
-				this.Objprevisaodeacao.lbDescri.Text = this.txtdescricao.Text;
-			}
-			if (this.txtdescricao.Text.Contains("Corretiva"))
-			{
-				this.Objprevisaodeacao.lbTipo.Text = "Corretiva";
-				return;
-			}
-			if (this.txtdescricao.Text.Contains("Preventiva"))
-			{
-				this.Objprevisaodeacao.lbTipo.Text = "Preventiva";
-				return;
-			}
-			if (this.txtdescricao.Text.Contains("Educativa"))
-			{
-				this.Objprevisaodeacao.lbTipo.Text = "Educativa";
-				return;
-			}
-			this.Objprevisaodeacao.lbTipo.Text = "Escreva tipo";
-		}
 
-		private void desricaoacaocontrole_Load(object sender, EventArgs e)
-		{
-			if (this.Objprevisaodeacao != null)
-			{
-				this.Objprevisaodeacao.lbData.Text = this.dpPrevista.Value.ToString("dd/MM/yyyy");
-			}
-		}
+                return true;
+            }
+            catch (WrongDatetime arg_EE_0)
+            {
+                MessageBox.Show(arg_EE_0.ToString());
+                return false;
+            }
+            catch (BlankFieldEx arg_FB_0)
+            {
+                MessageBox.Show(arg_FB_0.ToString());
+                return false;
+            }
+            catch (NoButtonSelected e)
+            {
+                MessageBox.Show(e.ToString());
+                return false;
+            }
 
-		private void dpPrevista_ValueChanged(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-			if (this.Objprevisaodeacao != null)
-			{
-				this.Objprevisaodeacao.lbData.Text = this.dpPrevista.Value.ToString("dd/MM/yyyy");
-			}
-		}
 
-		private void btLimpar_Click(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-			this.txtdescricao.Text = null;
-			this.dpPrevista.Text = DateTime.Now.ToString("dd/MM/yyyy");
-			this.txtObservacao.Text = null;
-			this.ckRealizada.Checked = false;
-			this.dpPrevistaPara.Text = DateTime.Now.ToString("dd/MM/yyyy");
-			this.ckeficaz.Checked = false;
-			this.txtVerificadoPor.Text = null;
-			this.dpDTVerificada.Text = DateTime.Now.ToString("dd/MM/yyyy");
-			this.cknovorelatorio.Checked = false;
-			this.dpNovoRelatorio.Text = DateTime.Now.ToString("dd/MM/yyyy");
-			this.mskNRNC.Text = null;
-		}
 
-		private void dpDtRealizada_ValueChanged(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-		}
+        }
 
-		private void dpPrevistaPara_ValueChanged(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-		}
+        private static void CheckDate(string[] _ToText)
+        {
+            string format = "dd/MM/yyyy";
+            CultureInfo formatdate = new CultureInfo("pt-BR");
+            for (int i = 0; i < _ToText.Length; i++)
+            {
+                DateTime datetime;
+                if (!DateTime.TryParseExact(_ToText[i], format, formatdate, DateTimeStyles.AssumeLocal, out datetime))
+                {
+                    throw new WrongDatetime("Data incorreta");
+                }
+            }
+        }
 
-		private void txtVerificadoPor_TextChanged(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-		}
+        private static void CheckDate(DateTime _date)
+        {
+            new CultureInfo("pt-BR");
+        }
 
-		private void dpDTVerificada_ValueChanged(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-		}
+        private static void CheckBlank(string[] _ToText)
+        {
+            for (int i = 0; i < _ToText.Length; i++)
+            {
+                if (!(_ToText[i] != ""))
+                {
+                    throw new BlankFieldEx("Algum campo obrigatorio esta em branco");
+                }
+            }
+        }
 
-		private void mskNRNC_TextChanged(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-		}
+        public void button1_Click(object sender, EventArgs e)
+        {
+        }
 
-		private void txtObservacao_TextChanged(object sender, EventArgs e)
-		{
-			this.btGravar.Enabled = true;
-		}
+        private void ckeficaz_CheckedChanged(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
 
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && this.components != null)
-			{
-				this.components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
+            if (this.ckeficaz.Checked)
+            {
+                this.pnEficacia.Visible = true;
+                return;
+            }
+            this.pnEficacia.Visible = false;
+        }
 
-		private void InitializeComponent()
-		{
+        private void cbRealizada_CheckedChanged(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+
+            this.RealizadaCKHandler();
+        }
+
+        private void RealizadaCKHandler()
+        {
+            if (this.ckRealizada.Checked)
+            {
+                this.dpDtRealizada.Visible = true;
+                this.dpPrevistaPara.Visible = true;
+                this.dpDTVerificada.Visible = true;
+                this.gpVerificacao.Visible = true;
+                this.gpEficiencia.Visible = true;
+                this.pnEficacia.Visible = false;
+                return;
+            }
+            this.ckeficaz.Checked = false;
+            this.dpDtRealizada.Visible = false;
+            this.dpPrevistaPara.Visible = false;
+            this.dpDTVerificada.Visible = false;
+            this.gpVerificacao.Visible = false;
+            this.gpEficiencia.Visible = false;
+
+        }
+
+        private void ckeficaz_CheckedChanged_1(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+            if (this.ckeficaz.Checked)
+            {
+
+                this.dpDTVerificada.Visible = true;
+                this.gpVerificacao.Visible = true;
+                this.gpEficiencia.Visible = true;
+                this.pnEficacia.Visible = true;
+                return;
+            }
+            this.pnEficacia.Visible = false;
+        }
+
+        private void cknovorelatorio_CheckedChanged(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+            if (this.cknovorelatorio.Checked)
+            {
+                this.label12.Visible = true;
+                this.dpNovoRelatorio.Visible = true;
+                this.label1.Visible = true;
+                this.mskNRNC.Visible = true;
+                return;
+            }
+            this.label12.Visible = false;
+            this.dpNovoRelatorio.Visible = false;
+            this.label1.Visible = false;
+            this.mskNRNC.Visible = false;
+        }
+
+        private void btGravar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.m_transformacaoitem(this.AcaoUsando))
+                {
+                    List<acaoitem> listaToReplace = StoreRelatorio.GetList();
+
+
+                    if (listaToReplace.Count<acaoitem>() == 0)
+                    {
+                        this.AcaoUsando.id = 1;
+                        listaToReplace.Add(this.AcaoUsando);
+                    }
+                    else if (listaToReplace.Count<acaoitem>() > 0)
+                    {
+                        acaoitem aux = listaToReplace.Last<acaoitem>();
+                        for (int i = 0; i < listaToReplace.Count<acaoitem>(); i++)
+                        {
+                            if (this.AcaoUsando.id == 0)
+                            {
+                                this.AcaoUsando.id = aux.id + 1;
+                                listaToReplace.Add(this.AcaoUsando);
+                                break;
+                            }
+                            if (listaToReplace[i].id == this.AcaoUsando.id)
+                            {
+                                listaToReplace[listaToReplace.IndexOf(listaToReplace[i])] = this.AcaoUsando;
+                            }
+                        }
+                    }
+
+                    StoreRelatorio.SetList(listaToReplace);
+                    this.btGravar.Enabled = false;
+                    MessageBox.Show("Acao gravado com sucesso, lembre-se é nescessario salvar o relatorio");
+                }
+
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void txtdescricao_TextChanged(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+            if (this.txtdescricao.Text.Length > 9)
+            {
+                this.Objprevisaodeacao.lbDescri.Text = this.txtdescricao.Text.Substring(0, 9) + "...";
+            }
+            else
+            {
+                this.Objprevisaodeacao.lbDescri.Text = this.txtdescricao.Text;
+            }
+
+        }
+
+        private void desricaoacaocontrole_Load(object sender, EventArgs e)
+        {
+            if (this.Objprevisaodeacao != null)
+            {
+                this.Objprevisaodeacao.lbData.Text = this.dpPrevista.Value.ToString("dd/MM/yyyy");
+                setLineFormat(1, 2, txtObservacao);
+                setLineFormat(1, 2, txtdescricao);
+            }
+
+        }
+
+        private void dpPrevista_ValueChanged(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+            if (this.Objprevisaodeacao != null)
+            {
+                this.Objprevisaodeacao.lbData.Text = this.dpPrevista.Value.ToString("dd/MM/yyyy");
+            }
+        }
+
+        private void btLimpar_Click(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+            this.txtdescricao.Text = null;
+            this.dpPrevista.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            this.txtObservacao.Text = null;
+            this.ckRealizada.Checked = false;
+            this.dpPrevistaPara.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            this.ckeficaz.Checked = false;
+            this.txtVerificadoPor.Text = null;
+            this.dpDTVerificada.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            this.cknovorelatorio.Checked = false;
+            this.dpNovoRelatorio.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            this.mskNRNC.Text = null;
+        }
+
+        private void dpDtRealizada_ValueChanged(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+        }
+
+        private void dpPrevistaPara_ValueChanged(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+        }
+
+        private void txtVerificadoPor_TextChanged(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+        }
+
+        private void dpDTVerificada_ValueChanged(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+        }
+
+        private void mskNRNC_TextChanged(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+        }
+
+        private void txtObservacao_TextChanged(object sender, EventArgs e)
+        {
+            this.btGravar.Enabled = true;
+            if (RNCfechada)
+            {
+                this.btGravar.Enabled = false;
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && this.components != null)
+            {
+                this.components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.gpDescricao = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rbCorretiva = new System.Windows.Forms.RadioButton();
             this.pbFAQDescriçãoAção = new System.Windows.Forms.PictureBox();
             this.ckRealizada = new System.Windows.Forms.CheckBox();
             this.dpDtRealizada = new System.Windows.Forms.DateTimePicker();
@@ -506,6 +615,9 @@ namespace RNC
             // 
             // gpDescricao
             // 
+            this.gpDescricao.Controls.Add(this.radioButton2);
+            this.gpDescricao.Controls.Add(this.radioButton1);
+            this.gpDescricao.Controls.Add(this.rbCorretiva);
             this.gpDescricao.Controls.Add(this.pbFAQDescriçãoAção);
             this.gpDescricao.Controls.Add(this.ckRealizada);
             this.gpDescricao.Controls.Add(this.dpDtRealizada);
@@ -519,7 +631,43 @@ namespace RNC
             this.gpDescricao.Size = new System.Drawing.Size(750, 84);
             this.gpDescricao.TabIndex = 15;
             this.gpDescricao.TabStop = false;
-            this.gpDescricao.Text = "Descrição da Ação (Corretiva, Preventiva ou Educativa)";
+            this.gpDescricao.Text = "Descrição da Ação";
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(415, 61);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(73, 17);
+            this.radioButton2.TabIndex = 28;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Educativa";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.rbCorretiva_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(415, 38);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(76, 17);
+            this.radioButton1.TabIndex = 27;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Preventiva";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.rbCorretiva_CheckedChanged);
+            // 
+            // rbCorretiva
+            // 
+            this.rbCorretiva.AutoSize = true;
+            this.rbCorretiva.Location = new System.Drawing.Point(415, 15);
+            this.rbCorretiva.Name = "rbCorretiva";
+            this.rbCorretiva.Size = new System.Drawing.Size(67, 17);
+            this.rbCorretiva.TabIndex = 26;
+            this.rbCorretiva.TabStop = true;
+            this.rbCorretiva.Text = "Corretiva";
+            this.rbCorretiva.UseVisualStyleBackColor = true;
+            this.rbCorretiva.CheckedChanged += new System.EventHandler(this.rbCorretiva_CheckedChanged);
             // 
             // pbFAQDescriçãoAção
             // 
@@ -584,9 +732,10 @@ namespace RNC
             // 
             // txtdescricao
             // 
+            this.txtdescricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtdescricao.Location = new System.Drawing.Point(3, 19);
             this.txtdescricao.Name = "txtdescricao";
-            this.txtdescricao.Size = new System.Drawing.Size(438, 59);
+            this.txtdescricao.Size = new System.Drawing.Size(406, 59);
             this.txtdescricao.TabIndex = 0;
             this.txtdescricao.Text = "";
             this.txtdescricao.TextChanged += new System.EventHandler(this.txtdescricao_TextChanged);
@@ -768,6 +917,7 @@ namespace RNC
             // txtObservacao
             // 
             this.txtObservacao.AcceptsTab = true;
+            this.txtObservacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtObservacao.Location = new System.Drawing.Point(494, 7);
             this.txtObservacao.Name = "txtObservacao";
             this.txtObservacao.Size = new System.Drawing.Size(221, 65);
@@ -857,7 +1007,7 @@ namespace RNC
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
+        }
 
         private void pbFAQObservaçãoAcao_MouseHover(object sender, EventArgs e)
         {
@@ -877,6 +1027,120 @@ namespace RNC
         {
             ToolTip tt = new ToolTip();
             tt.SetToolTip(this.pbFAQDescriçãoAção, "Ação proposta para que a não conformidade não se repita.");
+        }
+
+        private void rbCorretiva_CheckedChanged(object sender, EventArgs e)
+        {
+            string text = ((RadioButton)sender).Text;
+            if (text == "Corretiva")
+            {
+                this.AcaoUsando.tipo = "Corretiva";
+
+
+            }
+            if (text == "Preventiva")
+            {
+                this.AcaoUsando.tipo = "Preventiva";
+
+
+            }
+            if (text == "Educativa")
+            {
+                this.AcaoUsando.tipo = "Educativa";
+
+
+            }
+            if (Objprevisaodeacao != null)
+            {
+                Objprevisaodeacao.lbTipo.Text = text.Trim();
+            }
+
+        }
+        private void LockAllControllers(Control.ControlCollection control)
+        {
+            foreach (Control controls in control)
+            {
+                if (controls is RadioButton || controls is TextBox || controls is CheckBox || controls is RichTextBox || controls is ComboBox || controls is DateTimePicker || controls is Button)
+                {
+                    if (controls is TextBox)
+                    {
+                        ((TextBox)controls).ReadOnly = true;
+                    }
+                    else if (controls is RichTextBox)
+                    {
+                        ((RichTextBox)controls).ReadOnly = true;
+                    }
+                    else
+                    {
+                        controls.Enabled = false;
+                    }
+
+
+
+
+
+                }
+                if (controls.HasChildren)
+                {
+                    LockAllControllers(controls.Controls);
+
+                }
+
+            }
+
+
+        }
+        [DllImport("user32", CharSet = CharSet.Auto)]
+        private static extern IntPtr SendMessage(HandleRef hWnd, int msg, int wParam, ref PARAFORMAT lParam);
+        const int PFM_SPACEBEFORE = 0x00000040;
+        const int PFM_SPACEAFTER  = 0x00000080;
+        const int PFM_LINESPACING = 0x00000100;
+        const int SCF_SELECTION = 1;
+        const int EM_SETPARAFORMAT = 1095;
+
+        private void setLineFormat(byte rule, int space, RichTextBox target)
+        {
+            PARAFORMAT fmt = new PARAFORMAT();
+            fmt.cbSize = Marshal.SizeOf(fmt);
+            fmt.dwMask = PFM_LINESPACING;
+            fmt.dyLineSpacing = space;
+            fmt.bLineSpacingRule = rule;
+            target.SelectAll();
+            SendMessage( new HandleRef( target, target.Handle ),
+                EM_SETPARAFORMAT,
+                SCF_SELECTION,
+                ref fmt
+            );
+        }
+        [StructLayout( LayoutKind.Sequential )]
+        public struct PARAFORMAT
+        {
+            public int cbSize;
+            public uint dwMask;
+            public short wNumbering;
+            public short wReserved;
+            public int dxStartIndent;
+            public int dxRightIndent;
+            public int dxOffset;
+            public short wAlignment;
+            public short cTabCount;
+            [MarshalAs( UnmanagedType.ByValArray, SizeConst = 32 )]
+            public int[] rgxTabs;
+            // PARAFORMAT2 from here onwards
+            public int dySpaceBefore;
+            public int dySpaceAfter;
+            public int dyLineSpacing;
+            public short sStyle;
+            public byte bLineSpacingRule;
+            public byte bOutlineLevel;
+            public short wShadingWeight;
+            public short wShadingStyle;
+            public short wNumberingStart;
+            public short wNumberingStyle;
+            public short wNumberingTab;
+            public short wBorderSpace;
+            public short wBorderWidth;
+            public short wBorders;
         }
     }
 }

@@ -110,14 +110,14 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(956, 795);
+            this.MainPanel.Size = new System.Drawing.Size(956, 656);
             this.MainPanel.TabIndex = 0;
             // 
             // pnacaoitem
             // 
-            this.pnacaoitem.AutoSize = true;
             this.pnacaoitem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnacaoitem.Location = new System.Drawing.Point(24, 479);
+            this.pnacaoitem.MinimumSize = new System.Drawing.Size(0, 316);
             this.pnacaoitem.Name = "pnacaoitem";
             this.pnacaoitem.Size = new System.Drawing.Size(932, 316);
             this.pnacaoitem.TabIndex = 22;
@@ -129,7 +129,7 @@
             this.flowpanelAcao.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowpanelAcao.Location = new System.Drawing.Point(0, 479);
             this.flowpanelAcao.Name = "flowpanelAcao";
-            this.flowpanelAcao.Size = new System.Drawing.Size(24, 316);
+            this.flowpanelAcao.Size = new System.Drawing.Size(24, 177);
             this.flowpanelAcao.TabIndex = 20;
             // 
             // btadd
@@ -234,6 +234,7 @@
             // txtDisposicao
             // 
             this.txtDisposicao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDisposicao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDisposicao.Location = new System.Drawing.Point(3, 16);
             this.txtDisposicao.Name = "txtDisposicao";
             this.txtDisposicao.Size = new System.Drawing.Size(950, 50);
@@ -263,6 +264,7 @@
             // txtInvestigacao
             // 
             this.txtInvestigacao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtInvestigacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInvestigacao.Location = new System.Drawing.Point(0, 13);
             this.txtInvestigacao.Name = "txtInvestigacao";
             this.txtInvestigacao.Size = new System.Drawing.Size(956, 117);
@@ -370,7 +372,6 @@
             // 
             // gbOrigen
             // 
-            this.gbOrigen.BackColor = System.Drawing.SystemColors.Control;
             this.gbOrigen.Controls.Add(this.pbFAQOrigem);
             this.gbOrigen.Controls.Add(this.txtOutros);
             this.gbOrigen.Controls.Add(this.rbOutros);
@@ -386,57 +387,56 @@
             this.gbOrigen.Location = new System.Drawing.Point(0, 0);
             this.gbOrigen.Name = "gbOrigen";
             this.gbOrigen.Size = new System.Drawing.Size(956, 78);
-            this.gbOrigen.TabIndex = 9;
+            this.gbOrigen.TabIndex = 0;
             this.gbOrigen.TabStop = false;
-            this.gbOrigen.Text = "Origem: ";
+            this.gbOrigen.Text = "Origem:";
             // 
             // pbFAQOrigem
             // 
             this.pbFAQOrigem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbFAQOrigem.Image = global::RNC.Properties.Resources.faqs;
-            this.pbFAQOrigem.Location = new System.Drawing.Point(934, 58);
+            this.pbFAQOrigem.Location = new System.Drawing.Point(934, 56);
             this.pbFAQOrigem.Name = "pbFAQOrigem";
             this.pbFAQOrigem.Size = new System.Drawing.Size(16, 16);
             this.pbFAQOrigem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbFAQOrigem.TabIndex = 9;
+            this.pbFAQOrigem.TabIndex = 19;
             this.pbFAQOrigem.TabStop = false;
-            this.pbFAQOrigem.MouseHover += new System.EventHandler(this.pbFAQOrigem_MouseHover);
             // 
             // txtOutros
             // 
-            this.txtOutros.Location = new System.Drawing.Point(791, 9);
+            this.txtOutros.Location = new System.Drawing.Point(769, 7);
             this.txtOutros.Name = "txtOutros";
             this.txtOutros.Size = new System.Drawing.Size(140, 20);
-            this.txtOutros.TabIndex = 8;
+            this.txtOutros.TabIndex = 17;
             this.txtOutros.Visible = false;
             // 
             // rbOutros
             // 
             this.rbOutros.AutoSize = true;
-            this.rbOutros.Location = new System.Drawing.Point(726, 9);
+            this.rbOutros.Location = new System.Drawing.Point(704, 7);
             this.rbOutros.Name = "rbOutros";
             this.rbOutros.Size = new System.Drawing.Size(59, 17);
-            this.rbOutros.TabIndex = 7;
+            this.rbOutros.TabIndex = 15;
             this.rbOutros.TabStop = true;
             this.rbOutros.Text = "Outros:";
             this.rbOutros.UseVisualStyleBackColor = true;
-            this.rbOutros.CheckedChanged += new System.EventHandler(this.rbOutros_CheckedChanged);
+            this.rbOutros.CheckedChanged += new System.EventHandler(this.rbOutros_CheckedChanged_1);
             // 
             // txtexterna
             // 
-            this.txtexterna.Location = new System.Drawing.Point(254, 54);
+            this.txtexterna.Location = new System.Drawing.Point(232, 52);
             this.txtexterna.Name = "txtexterna";
             this.txtexterna.Size = new System.Drawing.Size(79, 20);
-            this.txtexterna.TabIndex = 8;
+            this.txtexterna.TabIndex = 18;
             this.txtexterna.Visible = false;
             // 
             // rbverificacaocontrole
             // 
             this.rbverificacaocontrole.AutoSize = true;
-            this.rbverificacaocontrole.Location = new System.Drawing.Point(441, 9);
+            this.rbverificacaocontrole.Location = new System.Drawing.Point(419, 7);
             this.rbverificacaocontrole.Name = "rbverificacaocontrole";
             this.rbverificacaocontrole.Size = new System.Drawing.Size(199, 17);
-            this.rbverificacaocontrole.TabIndex = 4;
+            this.rbverificacaocontrole.TabIndex = 12;
             this.rbverificacaocontrole.TabStop = true;
             this.rbverificacaocontrole.Text = "Verificação de Controle em Processo\r\n";
             this.rbverificacaocontrole.UseVisualStyleBackColor = true;
@@ -444,10 +444,10 @@
             // rbreclamacao
             // 
             this.rbreclamacao.AutoSize = true;
-            this.rbreclamacao.Location = new System.Drawing.Point(69, 9);
+            this.rbreclamacao.Location = new System.Drawing.Point(47, 7);
             this.rbreclamacao.Name = "rbreclamacao";
             this.rbreclamacao.Size = new System.Drawing.Size(135, 17);
-            this.rbreclamacao.TabIndex = 1;
+            this.rbreclamacao.TabIndex = 9;
             this.rbreclamacao.TabStop = true;
             this.rbreclamacao.Text = "Reclamação de Cliente";
             this.rbreclamacao.UseVisualStyleBackColor = true;
@@ -455,29 +455,29 @@
             // rbinspecao
             // 
             this.rbinspecao.AutoSize = true;
-            this.rbinspecao.Location = new System.Drawing.Point(441, 32);
+            this.rbinspecao.Location = new System.Drawing.Point(419, 30);
             this.rbinspecao.Name = "rbinspecao";
             this.rbinspecao.Size = new System.Drawing.Size(206, 17);
-            this.rbinspecao.TabIndex = 5;
+            this.rbinspecao.TabIndex = 13;
             this.rbinspecao.TabStop = true;
             this.rbinspecao.Text = "Inspeção de Recebimento da Amostra";
             this.rbinspecao.UseVisualStyleBackColor = true;
             // 
             // txtauditoria
             // 
-            this.txtauditoria.Location = new System.Drawing.Point(254, 31);
+            this.txtauditoria.Location = new System.Drawing.Point(232, 29);
             this.txtauditoria.Name = "txtauditoria";
             this.txtauditoria.Size = new System.Drawing.Size(79, 20);
-            this.txtauditoria.TabIndex = 7;
+            this.txtauditoria.TabIndex = 16;
             this.txtauditoria.Visible = false;
             // 
             // rbaudext
             // 
             this.rbaudext.AutoSize = true;
-            this.rbaudext.Location = new System.Drawing.Point(69, 55);
+            this.rbaudext.Location = new System.Drawing.Point(47, 53);
             this.rbaudext.Name = "rbaudext";
             this.rbaudext.Size = new System.Drawing.Size(157, 17);
-            this.rbaudext.TabIndex = 3;
+            this.rbaudext.TabIndex = 11;
             this.rbaudext.TabStop = true;
             this.rbaudext.Text = "Auditoria Externa/Inspeção:";
             this.rbaudext.UseVisualStyleBackColor = true;
@@ -486,10 +486,10 @@
             // rbaudint
             // 
             this.rbaudint.AutoSize = true;
-            this.rbaudint.Location = new System.Drawing.Point(69, 32);
+            this.rbaudint.Location = new System.Drawing.Point(47, 30);
             this.rbaudint.Name = "rbaudint";
             this.rbaudint.Size = new System.Drawing.Size(179, 17);
-            this.rbaudint.TabIndex = 2;
+            this.rbaudint.TabIndex = 10;
             this.rbaudint.TabStop = true;
             this.rbaudint.Text = "Auditoria Interna/Auto Inspeção:\r\n";
             this.rbaudint.UseVisualStyleBackColor = true;
@@ -498,10 +498,10 @@
             // rbexterno
             // 
             this.rbexterno.AutoSize = true;
-            this.rbexterno.Location = new System.Drawing.Point(441, 54);
+            this.rbexterno.Location = new System.Drawing.Point(419, 52);
             this.rbexterno.Name = "rbexterno";
             this.rbexterno.Size = new System.Drawing.Size(141, 17);
-            this.rbexterno.TabIndex = 6;
+            this.rbexterno.TabIndex = 14;
             this.rbexterno.TabStop = true;
             this.rbexterno.Text = "Controle Externo - PELM";
             this.rbexterno.UseVisualStyleBackColor = true;
@@ -597,6 +597,7 @@
             // txtDesRNC
             // 
             this.txtDesRNC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDesRNC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDesRNC.Location = new System.Drawing.Point(0, 13);
             this.txtDesRNC.Name = "txtDesRNC";
             this.txtDesRNC.Size = new System.Drawing.Size(956, 53);
@@ -626,9 +627,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.MainPanel);
             this.Name = "cadastrocontrol";
-            this.Size = new System.Drawing.Size(956, 795);
+            this.Size = new System.Drawing.Size(956, 656);
             this.Load += new System.EventHandler(this.cadastrocontrol_Load);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
@@ -680,6 +682,18 @@
         private System.Windows.Forms.RadioButton rbacaopreventiva;
         private System.Windows.Forms.RadioButton rbacaocorretiva;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ComboBox cbSetor;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker dpDataRNC;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.TextBox txtemitente;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.FlowLayoutPanel flowpanelAcao;
+        private System.Windows.Forms.Button btadd;
+        public System.Windows.Forms.Panel pnacaoitem;
+        private System.Windows.Forms.PictureBox pbFAQRisco;
+        private System.Windows.Forms.PictureBox pbFAQTratamento;
         private System.Windows.Forms.GroupBox gbOrigen;
         public System.Windows.Forms.TextBox txtOutros;
         private System.Windows.Forms.RadioButton rbOutros;
@@ -691,22 +705,10 @@
         private System.Windows.Forms.RadioButton rbaudext;
         private System.Windows.Forms.RadioButton rbaudint;
         private System.Windows.Forms.RadioButton rbexterno;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ComboBox cbSetor;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dpDataRNC;
-        private System.Windows.Forms.Label label3;
-        public System.Windows.Forms.TextBox txtemitente;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pbFAQOrigem;
         private System.Windows.Forms.Panel panel2;
         public System.Windows.Forms.RichTextBox txtDesRNC;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.FlowLayoutPanel flowpanelAcao;
-        private System.Windows.Forms.Button btadd;
-        public System.Windows.Forms.Panel pnacaoitem;
-        private System.Windows.Forms.PictureBox pbFAQOrigem;
-        private System.Windows.Forms.PictureBox pbFAQRisco;
-        private System.Windows.Forms.PictureBox pbFAQTratamento;
     }
 }

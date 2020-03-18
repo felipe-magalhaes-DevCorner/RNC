@@ -1,16 +1,11 @@
-﻿using System;
+﻿using RNC.comunicacao;
+using RNC.Exceptions;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using RNC.comunicacao;
-using RNC.Data;
-using RNC.Exceptions;
 // ReSharper disable ComplexConditionExpression
 
 namespace RNC.controles
@@ -28,13 +23,13 @@ namespace RNC.controles
         private List<previsaodeacao> listacoes = new List<previsaodeacao>();
         private string numerofinal;
         public Form parentObj { get; set; }
-        
+
         #region Contrutor
 
         public cadastrocontrol(relatorio _relatorioRNC = null)
         {
             this.InitializeComponent();
-            
+
             this.txtemitente.Text = StoreRelatorio.loggedname;
             int a = this.rbaudint.Text.Length;
             int b = this.rbaudext.Text.Length;
@@ -48,8 +43,21 @@ namespace RNC.controles
 
             this.relatorioRNC = _relatorioRNC;
             StoreRelatorio.SetRelatorio(this.relatorioRNC);
+            LineSpacing(1, 2);
+
+
         }
 
+        private void LineSpacing(byte rule,int space)
+        {
+            setLineFormat(1, 2, txtDesRNC);
+            setLineFormat(1, 2, txtDisposicao);
+            setLineFormat(1, 2, txtInvestigacao);
+            
+            //setLineFormat(1, 2, txt);
+
+
+        }
 
 
 
@@ -89,6 +97,7 @@ namespace RNC.controles
 
         private void CarregaRelatorio(relatorio _relatorioRNC)
         {
+            bool RNCFechada = false;
             List<string> fields = _relatorioRNC.GetRelatorioFields();
 
             for (int i = 0; i < fields.Count; i++)
@@ -155,27 +164,38 @@ namespace RNC.controles
 
                     case 9:
                         {
+                            if (fields[9].ToString().Trim() == "Fechada")
+                            {
+                                RNCFechada = true;
+                                LockAllControllers(this.Controls);
+                            }
+
+                            break;
+                        }
+                    case 10:
+                        {
                             var buttons = gbRisco.Controls.OfType<RadioButton>()
                                 .FirstOrDefault(n => n.Text.Contains(fields[10]));
                             buttons.Checked = true;
                             break;
                         }
 
+
                 }
             }
 
+            //todo handle locking if closed
             this.pnacaoitem.Controls.Clear();
             using (List<acaoitem>.Enumerator enumerator = _relatorioRNC.GetList().GetEnumerator())
             {
                 while (enumerator.MoveNext())
                 {
-                    previsaodeacao previsao = new previsaodeacao(enumerator.Current);
+                    previsaodeacao previsao = new previsaodeacao(enumerator.Current, RNCFechada);
                     previsao.setOrigenPanel(this.flowpanelAcao);
                     previsao.M_setpainel(this.pnacaoitem);
                     this.flowpanelAcao.Controls.Add(previsao);
                 }
             }
-
 
         }
 
@@ -203,7 +223,63 @@ namespace RNC.controles
 
 
 
+
         }
+        [DllImport("user32", CharSet = CharSet.Auto)]
+        private static extern IntPtr SendMessage(HandleRef hWnd, int msg, int wParam, ref PARAFORMAT lParam);
+        const int PFM_SPACEBEFORE = 0x00000040;
+        const int PFM_SPACEAFTER  = 0x00000080;
+        const int PFM_LINESPACING = 0x00000100;
+        const int SCF_SELECTION = 1;
+        const int EM_SETPARAFORMAT = 1095;
+
+        private void setLineFormat(byte rule, int space, RichTextBox target)
+        {
+            PARAFORMAT fmt = new PARAFORMAT();
+            fmt.cbSize = Marshal.SizeOf(fmt);
+            fmt.dwMask = PFM_LINESPACING;
+            fmt.dyLineSpacing = space;
+            fmt.bLineSpacingRule = rule;
+            target.SelectAll();
+            SendMessage( new HandleRef( target, target.Handle ),
+                EM_SETPARAFORMAT,
+                SCF_SELECTION,
+                ref fmt
+            );
+        }
+        [StructLayout( LayoutKind.Sequential )]
+        public struct PARAFORMAT
+        {
+            public int cbSize;
+            public uint dwMask;
+            public short wNumbering;
+            public short wReserved;
+            public int dxStartIndent;
+            public int dxRightIndent;
+            public int dxOffset;
+            public short wAlignment;
+            public short cTabCount;
+            [MarshalAs( UnmanagedType.ByValArray, SizeConst = 32 )]
+            public int[] rgxTabs;
+            // PARAFORMAT2 from here onwards
+            public int dySpaceBefore;
+            public int dySpaceAfter;
+            public int dyLineSpacing;
+            public short sStyle;
+            public byte bLineSpacingRule;
+            public byte bOutlineLevel;
+            public short wShadingWeight;
+            public short wShadingStyle;
+            public short wNumberingStart;
+            public short wNumberingStyle;
+            public short wNumberingTab;
+            public short wBorderSpace;
+            public short wBorderWidth;
+            public short wBorders;
+        }
+
+        
+    
 
         #endregion
 
@@ -314,12 +390,12 @@ namespace RNC.controles
 
                         throw new Exceptions.BlankFieldEx(
                             "Para selecionar auditoria, o campo em frente deve ser preenchido!");
-                        
+
                     }
                 }
                 var gbRisco = this.gbRisco.Controls.OfType<RadioButton>()
                     .FirstOrDefault(n => n.Checked);
-                if (gbRisco == null || gbRisco.Text =="")
+                if (gbRisco == null || gbRisco.Text == "")
                 {
 
                     throw new Exceptions.NoButtonSelected(
@@ -328,10 +404,10 @@ namespace RNC.controles
                 }
                 var risco = gbRisco.Text;
 
-                
+
                 var tnc = gbtnc.Controls.OfType<RadioButton>()
                     .FirstOrDefault(n => n.Checked);
-                if (tnc == null || tnc.Text =="")
+                if (tnc == null || tnc.Text == "")
                 {
 
                     throw new Exceptions.NoButtonSelected(
@@ -409,16 +485,16 @@ namespace RNC.controles
         private void Resize_MouseDown(object sender, MouseEventArgs e)
         {
             mouseClicked = true;
-            resixermoreFluid = ((Panel) sender).Parent.Height;
+            resixermoreFluid = ((Panel)sender).Parent.Height;
 
             if (sender is Panel)
             {
-                resixermoreFluid = ((Panel) sender).Parent.Height;
+                resixermoreFluid = ((Panel)sender).Parent.Height;
             }
 
             if (sender is GroupBox)
             {
-                resixermoreFluid = ((Panel) sender).Parent.Height;
+                resixermoreFluid = ((Panel)sender).Parent.Height;
             }
 
 
@@ -428,28 +504,28 @@ namespace RNC.controles
         private int resixermoreFluid;
         private void Resize_MouseUp(object sender, MouseEventArgs e)
         {
-            
+
             mouseClicked = false;
             if (sender is Panel)
             {
-                ((Panel) sender).Parent.Height = resixermoreFluid;
+                ((Panel)sender).Parent.Height = resixermoreFluid;
             }
 
             if (sender is GroupBox)
             {
-                ((GroupBox) sender).Parent.Height = resixermoreFluid;
+                ((GroupBox)sender).Parent.Height = resixermoreFluid;
             }
-           
+
         }
 
         private void Resize_MouseMove(object sender, MouseEventArgs e)
         {
-            
+
             if (mouseClicked)
             {
 
 
-                resixermoreFluid = ((Panel) sender).Top + e.Y;
+                resixermoreFluid = ((Panel)sender).Top + e.Y;
                 //PanelReiszer.Parent.Height = pictureBox1.Top + e.Y;
                 //PanelReiszer.Parent.Width = pictureBox1.Top + e.Y;
                 //this.panel1.Height = pictureBox1.Top + e.Y;
@@ -483,7 +559,47 @@ namespace RNC.controles
             tt.SetToolTip(this.pbFAQRisco, "De acordo com o item 'Gestão de risco' do manual da qualidade");
         }
 
+        private void LockAllControllers(Control.ControlCollection control)
+        {
+            foreach (Control controls in control)
+            {
+                if (controls is RadioButton || controls is TextBox || controls is RichTextBox || controls is ComboBox || controls is DateTimePicker || controls is CheckBox)
+                {
+                    if (controls is TextBox)
+                    {
+                        ((TextBox)controls).ReadOnly = true;
+                    }
+                    else if (controls is RichTextBox)
+                    {
+                        ((RichTextBox)controls).ReadOnly = true;
+                    }
+                    else
+                    {
+                        controls.Enabled = false;
+                    }
 
+
+
+                }
+                if (controls.HasChildren)
+                {
+                    LockAllControllers(controls.Controls);
+
+                }
+
+            }
+
+
+        }
+
+        private void rbOutros_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (rbOutros.Checked)
+                txtOutros.Visible = true;
+            else
+                txtOutros.Visible = false;
+            
+        }
     }
 }
 

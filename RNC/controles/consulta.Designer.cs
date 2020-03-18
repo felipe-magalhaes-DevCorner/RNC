@@ -72,7 +72,7 @@
             // 
             // btnencerrar
             // 
-            this.btnencerrar.Location = new System.Drawing.Point(422, 16);
+            this.btnencerrar.Location = new System.Drawing.Point(228, 17);
             this.btnencerrar.Name = "btnencerrar";
             this.btnencerrar.Size = new System.Drawing.Size(100, 23);
             this.btnencerrar.TabIndex = 8;
@@ -99,7 +99,7 @@
             // 
             // btconsulta
             // 
-            this.btconsulta.Location = new System.Drawing.Point(241, 16);
+            this.btconsulta.Location = new System.Drawing.Point(147, 17);
             this.btconsulta.Name = "btconsulta";
             this.btconsulta.Size = new System.Drawing.Size(75, 23);
             this.btconsulta.TabIndex = 2;

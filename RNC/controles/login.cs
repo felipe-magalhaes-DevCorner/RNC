@@ -1,153 +1,151 @@
-using RNC.Properties;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
 namespace RNC
 {
-	public class login : Form
-	{
-		private connectionclassgmn db = new connectionclassgmn();
+    public class login : Form
+    {
+        private connectionclassgmn db = new connectionclassgmn();
 
-		public static string loginName;
+        public static string loginName;
 
-		public static string name;
+        public static string name;
 
 
 
-		private static bool control;
+        private static bool control;
 
-		private IContainer components;
+        private IContainer components;
 
-		private TextBox txtsenha;
+        private TextBox txtsenha;
 
-		private Label label1;
+        private Label label1;
 
-		private Label label2;
+        private Label label2;
 
-		private ComboBox comboBox1;
+        private ComboBox comboBox1;
 
-		private Label label3;
+        private Label label3;
 
-		private Label label4;
+        private Label label4;
 
-		private Button button2;
+        private Button button2;
         private PictureBox pictureBox1;
         private Button button1;
 
-		public Form getform
-		{
-			get;
-			set;
-		}
+        public Form getform
+        {
+            get;
+            set;
+        }
 
-		public login(bool _control = false)
-		{
-			this.InitializeComponent();
-			login.control = _control;
-			this.txtsenha.Clear();
-		}
+        public login(bool _control = false)
+        {
+            this.InitializeComponent();
+            login.control = _control;
+            this.txtsenha.Clear();
+        }
 
-		public login()
-		{
-			this.InitializeComponent();
-		}
+        public login()
+        {
+            this.InitializeComponent();
+        }
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			login.loginName = this.comboBox1.Text;
-//			this.db.SqlConnection();////////
+        private void button1_Click(object sender, EventArgs e)
+        {
+            login.loginName = this.comboBox1.Text;
+            //			this.db.SqlConnection();////////
             ConnectionClass con = new ConnectionClass();
             con.SqlConnection();
-			string query = "select USUARIOS.nome,USUARIOS.Login,USUARIOS.SENHA from USUARIOS where USUARIOS.nivel <> 0 AND USUARIOS.Login =  '" + this.comboBox1.Text + "'";
-                con.SqlQuery(query);
-			Clipboard.SetText(query);
-			SqlDataReader _dr = con.SingleCellReader();
-			if (!_dr.HasRows)
-			{
-				MessageBox.Show("Usuário Inexistente.");
-			}
-			while (_dr.Read())
-			{
-				if (this.LoginSQl(_dr["Login"].ToString(), _dr["SENHA"].ToString()))
-				{
-					login.loginName = _dr["Login"].ToString();
-					login.name = _dr["nome"].ToString();
-					login.control = true;
+            string query = "select USUARIOS.nome,USUARIOS.Login,USUARIOS.SENHA from USUARIOS where USUARIOS.nivel <> 0 AND USUARIOS.Login =  '" + this.comboBox1.Text + "'";
+            con.SqlQuery(query);
+            Clipboard.SetText(query);
+            SqlDataReader _dr = con.SingleCellReader();
+            if (!_dr.HasRows)
+            {
+                MessageBox.Show("Usuário Inexistente.");
+            }
+            while (_dr.Read())
+            {
+                if (this.LoginSQl(_dr["Login"].ToString(), _dr["SENHA"].ToString()))
+                {
+                    login.loginName = _dr["Login"].ToString();
+                    login.name = _dr["nome"].ToString();
+                    login.control = true;
                     StoreRelatorio.loggedname = login.name;
-					Form arg_102_0 = new Form1();
-					base.Hide();
-					arg_102_0.ShowDialog();
-				}
-				else
-				{
-					login.control = false;
-				}
-			}
-            con.closeConnection();
-		}
+                    Form arg_102_0 = new Form1();
+                    base.Hide();
+                    arg_102_0.ShowDialog();
+                }
+                else
+                {
+                    login.control = false;
+                }
+            }
+            con.closeConnectionAsync().Wait();
+        }
 
-		private bool LoginSQl(string nome, string password)
-		{
-			if (!(this.comboBox1.Text != ""))
-			{
-				MessageBox.Show("Favor informar um login.");
-				return false;
-			}
-			if (!(this.txtsenha.Text != ""))
-			{
-				MessageBox.Show("Favor informar uma senha.");
-				return false;
-			}
+        private bool LoginSQl(string nome, string password)
+        {
+            if (!(this.comboBox1.Text != ""))
+            {
+                MessageBox.Show("Favor informar um login.");
+                return false;
+            }
+            if (!(this.txtsenha.Text != ""))
+            {
+                MessageBox.Show("Favor informar uma senha.");
+                return false;
+            }
 
             var testevalue = Md5Hash(this.txtsenha.Text);
-			if (nome == this.comboBox1.Text && password == Md5Hash(this.txtsenha.Text))
-			{
-				return true;
-			}
-			MessageBox.Show("Login ou senha incorretos.");
-			return false;
-		}
+            if (nome == this.comboBox1.Text && password == Md5Hash(this.txtsenha.Text))
+            {
+                return true;
+            }
+            MessageBox.Show("Login ou senha incorretos.");
+            return false;
+        }
 
-		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-		{
-		}
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
 
-		private void login_Load(object sender, EventArgs e)
-		{
-			var con = new ConnectionClass();
+        private void login_Load(object sender, EventArgs e)
+        {
+            var con = new ConnectionClass();
             con.SqlConnection();
-			string query = "select USUARIOS.Login from USUARIOS where USUARIOS.nivel <> 0";
+            string query = "select USUARIOS.Login from USUARIOS where USUARIOS.nivel <> 0";
             con.SqlQuery(query);
-			Clipboard.SetText(query);
-			SqlDataReader reader = con.SingleCellReader();
-			DataTable dt = new DataTable();
-			dt.Columns.Add("Login", typeof(string));
-			dt.Load(reader);
-			this.comboBox1.ValueMember = "Login";
-			this.comboBox1.DisplayMember = "Login";
-			this.comboBox1.DataSource = dt;
-            con.closeConnection();
-		}
+            Clipboard.SetText(query);
+            SqlDataReader reader = con.SingleCellReader();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Login", typeof(string));
+            dt.Load(reader);
+            this.comboBox1.ValueMember = "Login";
+            this.comboBox1.DisplayMember = "Login";
+            this.comboBox1.DataSource = dt;
+            con.closeConnectionAsync().Wait();
+        }
 
-		private void button2_Click(object sender, EventArgs e)
-		{
-			base.Close();
-		}
+        private void button2_Click(object sender, EventArgs e)
+        {
+            base.Close();
+        }
 
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && this.components != null)
-			{
-				this.components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && this.components != null)
+            {
+                this.components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
         public static string Md5Hash(string _text)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
@@ -178,8 +176,8 @@ namespace RNC
 
 
 
-		private void InitializeComponent()
-		{
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login));
             this.txtsenha = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -321,6 +319,6 @@ namespace RNC
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
-	}
+        }
+    }
 }

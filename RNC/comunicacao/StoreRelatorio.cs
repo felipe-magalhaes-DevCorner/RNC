@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using RNC.controles;
+﻿using RNC.controles;
+using System.Collections.Generic;
 
 namespace RNC
 {
-    public static class StoreRelatorio
-    {public static relatorio RelatorioUsing
+	public static class StoreRelatorio
+	{
+		public static relatorio RelatorioUsing
 		{
 			get;
 			set;
@@ -34,9 +35,9 @@ namespace RNC
 			set;
 		}
 
-		public static void SetRelatorio(relatorio _relatorio)
+		public static void SetRelatorio(relatorio relatorio)
 		{
-			StoreRelatorio.RelatorioUsing = _relatorio;
+			StoreRelatorio.RelatorioUsing = relatorio;
 		}
 
 		public static relatorio GetRelatorio()
@@ -49,14 +50,14 @@ namespace RNC
 			return StoreRelatorio.RelatorioUsing.ReturnColecao();
 		}
 
-		public static void addAcao(acaoitem _acao)
+		public static void addAcao(acaoitem acao)
 		{
-			StoreRelatorio.RelatorioUsing.AddColecao(_acao);
+			StoreRelatorio.RelatorioUsing.AddColecao(acao);
 		}
 
-		public static acaoitem getAcao(int _Index)
+		public static acaoitem getAcao(int index)
 		{
-			return StoreRelatorio.RelatorioUsing.getAcaoByIndex(_Index);
+			return StoreRelatorio.RelatorioUsing.getAcaoByIndex(index);
 		}
 
 		public static List<string> GetUpdateInfo()
@@ -74,14 +75,14 @@ namespace RNC
 			return StoreRelatorio.CadastroUsing;
 		}
 
-		public static void SetList(List<acaoitem> _lista)
+		public static void SetList(List<acaoitem> lista)
 		{
-			StoreRelatorio.RelatorioUsing.ReturnColecao().SetList(_lista);
+			StoreRelatorio.RelatorioUsing.ReturnColecao().SetList(lista);
 		}
 
-		public static void storeRelatorioConsulta(relatorio _relatorio)
+		public static void storeRelatorioConsulta(relatorio relatorio)
 		{
-			StoreRelatorio.relatorioBack = _relatorio;
+			StoreRelatorio.relatorioBack = relatorio;
 		}
 
 		public static relatorio GetRelatorioConsulta()
@@ -89,9 +90,9 @@ namespace RNC
 			return StoreRelatorio.relatorioBack;
 		}
 
-		public static void UpdateRNCID(string _idrnc)
+		public static void UpdateRNCID(string idrnc)
 		{
-			StoreRelatorio.RelatorioUsing.UpdateID(_idrnc);
+			StoreRelatorio.RelatorioUsing.UpdateID(idrnc);
 		}
 
 		public static string GetRNCNumber()
@@ -110,8 +111,6 @@ namespace RNC
 			new colecaodeacaoitem().ClearAcoes();
 		}
 
-		public static void setColecao(colecaodeacaoitem colecao)
-		{
-		}
-    }
+
+	}
 }
