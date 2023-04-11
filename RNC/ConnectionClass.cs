@@ -19,9 +19,10 @@ namespace RNC
 
         #endregion
 
-        #region Configuração
+        #region Configuração/CONFIG
         public void SqlConnection()
         {
+            //CONFIG
             /////------------------------- AKI DIZEMOS AONDE ESTA O SQL-------------------------------
             //A _CONN PRIMEIRA  e segunda É MINHA A terceira DE VOCES SE TIVER UM ERRO CHECAR AKI PRIMEIRO.
 
