@@ -28,7 +28,7 @@ namespace RNC
             //_conn = new SqlConnection("Data Source=(localdb)\\ProjectsV13;Initial Catalog=Hospedaria;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             //_conn = new SqlConnection("Data Source = ANDROIDK1; Initial Catalog = Hospedaria; Persist Security Info = True; User ID = sa; Password = root");
             //----------------- suas
-            _conn = new SqlConnection("Data Source=192.168.0.11;Initial Catalog=RNC;Integrated Security=False;User ID=sa;Password=n3fr0d@t@;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            _conn = new SqlConnection("data source=desktop-4b091hb;initial catalog=RNC;user id=rnc_admin;password=pirulito3;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             //_conn = new SqlConnection("Data Source=192.168.0.11;Initial Catalog=RNC;Integrated Security=False;User ID=sa;Password=n3fr0d@t@;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             //_conn = new SqlConnection("Data Source=localhost\\SQLEXPRESS;Initial Catalog=RNC;Integrated Security=True");
